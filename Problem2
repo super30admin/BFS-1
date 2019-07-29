@@ -1,0 +1,32 @@
+//Time Complexity: O(n) ->
+//Space complexity: O(n) ->because use of queue
+
+//Accepted in Leetcode: Yes
+
+//Approach:
+//Start from the root and add elements to the queue such that: if element has right child, add it
+//If element has left child, add it.
+//To the resulting list, add only the first value seen in each level(this means, for a particular level if there is no right child, the left child gets added to the rightview)
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+     Queue<TreeNode> q = new LinkedList<>();
+     List<Integer> list = new ArrayList<>();
+        
+    if(root==null) return list;
+        
+     q.offer(root);
+    
+    while(!q.isEmpty())
+    {        
+		 int size = q.size();
+         for (int i=0; i<size; i++) {
+             TreeNode cur = q.poll();
+             if (i == 0) list.add(cur.val);
+             if (cur.right != null) q.offer(cur.right);
+             if (cur.left != null) q.offer(cur.left);
+         }
+    }        
+    return list;   
+    }
+}
