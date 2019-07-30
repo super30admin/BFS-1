@@ -47,4 +47,31 @@ public:
 
         return retVec;
     }
+
+    vector<vector<int>> levelOrder(TreeNode* root) { //another solution. Without using level.
+        vector<vector<int>> retVec;
+        if(root==NULL){return retVec;}
+        queue<TreeNode*> que;
+        que.push(root);
+
+        TreeNode* node; int size = 0;
+        while(!que.empty()){
+            vector<int> vec;
+            size = que.size();
+            for(int x = 0; x<size; x++){
+                node = que.front();
+                vec.push_back(node->val);
+                if(node->left!=NULL){
+                    que.push(node->left);
+                }
+                if(node->right!=NULL){
+                    que.push(node->right);
+                }
+                que.pop();
+            }
+            retVec.push_back(vec);
+        }
+
+        return retVec;
+    }
 };
