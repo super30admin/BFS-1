@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <vector>
 
+// Runtime: O(V*E) V = vertices E = edges.
+// Space: O(N)
+
 using namespace std;
 
 class Solution {
