@@ -8,6 +8,8 @@
 
 using namespace std;
 
+// approach : use queue and bst.
+
 struct TreeNode{
     int val;
     TreeNode* left;

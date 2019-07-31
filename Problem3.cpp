@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <vector>
 
+// approach: use queue and bst.
+
 using namespace std;
 
 struct TreeNode{
