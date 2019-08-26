@@ -7,7 +7,7 @@ import java.util.Queue;
 
 /**
  * Time: O(numNodes)
- * Space: O(1)
+ * Space: O(numNodes)
  * Leetcode Accepted: yes
  * Problems faced: NA
  */
