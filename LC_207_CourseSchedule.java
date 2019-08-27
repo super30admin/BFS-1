@@ -1,4 +1,7 @@
-
+// Time Complexity :O(numCourses * prerequisitesArray)/
+// Space Complexity :O(numCourses)// Declaring new Array List to store the necessary prereq's for each course
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No, as already discussed in class
 import java.util.*;
 import java.io.*;
 public class LC_207_CourseSchedule {
