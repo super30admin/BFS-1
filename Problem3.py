@@ -48,3 +48,39 @@ class Solution:
 					queue.append(tempNode.right)
 			res.append(tempList[-1]) # Append the values of that level to the result
 		return res
+
+	def rightSideView3(self, root: TreeNode) -> List[List[int]]:
+		# Time Complexity : O(n) where n is the number of nodes in the tree
+		# Space used by the code is reduced because we are not creating a new queue for every level
+		# Accpeted on Leetcode
+		if root == None:
+			return None
+		queue = deque()
+		queue.append(root) # queue to store the elements visited in the tree in every level
+		res = []
+		while len(queue) > 0:
+			temp = len(queue) # to store the number of elements at a particular level
+			rightmostNode = None # to store the value of a node present at that level
+			for i in range(temp):
+				tempNode = queue.popleft()
+				rightmostNode = tempNode.val
+				if tempNode.left != None:
+					queue.append(tempNode.left)
+				if tempNode.right != None:
+					queue.append(tempNode.right)
+			res.append(rightmostNode) # Append the values of that level to the result
+		return res
+
+	def rightSideView3(self, root: TreeNode) -> List[List[int]]:
+		result = []
+		self.helper(root, 0, result)
+		return result
+
+	def helper(self, root, depth, result):
+		# base case
+		if root == None:
+			return
+		if depth == len(result):
+			result.append(root.val)
+		self.helper(root.left, depth + 1, result)
+		self.helper(root.right, depth + 1, result)
