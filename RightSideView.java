@@ -19,6 +19,7 @@ public class RightSideView {
 		root.right = new TreeNode(3);
 		root.left.left = new TreeNode(4);
 		System.out.println(rightSideView(root));
+		System.out.println(rightSideViewRecursive(root));
 	}
 	
 	//Using BFS Level Order Traversal Algorithm
@@ -44,4 +45,22 @@ public class RightSideView {
 		}
 		return result;
     }
+	
+	//Using Recursion
+	//Time: O(numNodes)
+	public static List<Integer> rightSideViewRecursive(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		helper(root, 0, result);
+		return result;
+	}
+
+	private static void helper(TreeNode root, int level, List<Integer> result) {
+		if(root == null) return;
+		//Result size and level are equal when the node from that level is not inserted yet.
+		if(result.size() == level) {
+			result.add(root.val);
+		}
+		helper(root.right, level+1, result);
+		helper(root.left, level+1, result);	
+	}
 }
