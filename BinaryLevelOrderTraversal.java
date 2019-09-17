@@ -56,3 +56,31 @@ class Solution {
       }
   }
 }
+
+
+
+/**
+ * Solution 2: Recursive Solution 
+ * 
+ * Time Complexity: O(n)
+ * Space Complexity: O(n): The output storage
+ */
+
+ class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        int level = 0;
+        computeBfs(root, res, level);
+        return result;
+    }
+
+    public void computeBfs(TreeNode root, List<List<Integer>> result, int level) {
+        if (level == result.size())
+            result.add(new ArrayList<>());
+        
+            result.get(level).add(root.val);
+            computeBfs(root.left, result, level+1);
+            computeBfs(root.right, result, level+1);
+    }
+ }
