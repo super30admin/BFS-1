@@ -1,5 +1,5 @@
 //Time complexity: O(n) (as it traverse every node in the tree)
-//Space Complexity: O(1) (no extra space used)
+//Space Complexity: O(n) (iterating over everynode in each level)
 //Tried on leetcode: accepted
 //attempts: 2
 class Solution {
