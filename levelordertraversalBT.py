@@ -5,7 +5,9 @@
 #         self.left = None
 #         self.right = None
 
-#Time limit Exceeded on leetcode
+#Accepted on leetcode
+#Time Complexity - O(n) as we are traversing through every node
+#Space complexity - O(n) for queue
 
 class Solution(object):
     def levelOrder(self, root):
@@ -13,18 +15,21 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        result = []
         #Edge case
         if root == None:
-            return None
-        ans = []
+            return result
         queue = []
         queue.append(root)
         while(len(queue) > 0):
-            ans.append([node.val for node in queue])
-            for i in range(len(queue)):
-                node = queue[i]
-                if node.left != None:
-                    queue.append(node.left)
-                if node.right != None:
-                    queue.append(node.right)
-        return ans
+            temp = []
+            size = len(queue)
+            for i in range(size):
+                curr = queue.pop(0)
+                temp.append(curr.val)
+                if curr.left != None:
+                    queue.append(curr.left)
+                if curr.right != None:
+                    queue.append(curr.right)
+            result.append(temp)
+        return result
