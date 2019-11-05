@@ -1,0 +1,60 @@
+/*
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Leetcode: successful
+Runtime: 0 ms, faster than 100.00% of Java online submissions for Binary Tree Level Order Traversal.
+Memory Usage: 36.5 MB, less than 100.00% of Java online submissions for Binary Tree Level Order Traversal.
+
+Approach: 
+This is a DFS approach, not a BFS approach.
+
+I am keeping track of height of each element.
+then maintaing an arraylist for each height and pushing all the elements for a particular height.
+
+*
+
+//**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+//    HashMap<Integer, List<Integer>> hm ;
+    List<List<Integer>> ls;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        if(root==null) return new ArrayList<>();
+        
+        ls = new ArrayList<List<Integer>>();
+        ls.add(new ArrayList<>());
+        
+ //       hm= new HashMap<>();    
+        helper(root,0);
+        
+ //       for(Integer i : hm.keySet())  ls.add(hm.get(i));
+
+        return ls;
+    }
+    
+    
+  void  helper(TreeNode root, int ht)
+    {
+        
+        if(root==null) return;
+        
+ //       if(!hm.containsKey(ht)) hm.put(ht,new ArrayList<Integer>());
+        ls.get(ht).add(root.val);
+    //    hm.get(ht).add(root.val);        
+        ht+=1;
+        if((root.left!=null||root.right!=null)&&ls.size()<=ht)  ls.add(new ArrayList<>());
+        helper(root.left,ht);
+        helper(root.right,ht);
+        
+    }
+}
