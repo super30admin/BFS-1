@@ -5,24 +5,26 @@
 
 
 //Your code here along with comments explaining your approach
-class LevelOrderTraversal {
+class RightSideView {
     public List<Integer> rightSideView(TreeNode root) {
-    	List<List<Integer>> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         if(null == root){return result;}
         Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        int size = 0;
-        TreeNode temp = null;
+        q.offer(root);
         while(!q.isEmpty()){
-            size = q.size();
-            List<Integer> list = new ArrayList<>();
+            int size = q.size();
             for(int i = 0; i < size; i++){
-                temp = q.poll();
-                list.add(temp.val);
-                if(null != temp.left){q.add(temp.left);}
-                if(null != temp.right){q.add(temp.right);}
+                TreeNode temp = q.poll();
+                if(0 == i){
+                    result.add(temp.val);
+                }
+                if(null != temp.right){
+                    q.offer(temp.right);
+                }
+                if(null != temp.left){
+                    q.offer(temp.left);
+                }
             }
-            result.add(list);
         }
     return result;
     }
