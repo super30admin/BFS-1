@@ -15,20 +15,26 @@ from collections import deque
 class Solution:
     def levelOrder(self, root):
         res = []
-        if not root:
+        if not(root):
             return res
-        q= deque([root])
+        q= [root]
         #temp_lst = [] #if we declare here for each level we have to empty this
         while q:
-            temp_lst = [] #for each level we are creating a new list
+            #print("....")
+            temp_lst = [] #for each level we are creating a new list, that is for the current list
             size = len(q)
-            for i in range(size):
-                curr = q.popleft() #popleft in deques folloew fifo
+            for i in range(size): #as length of queue changes for every iteration, we do not use length here directly
+                #print("..----..")
+                curr = q.pop(0) #pop first element in queue
                 temp_lst.append(curr.val)
                 if curr.left:
+                    #print("..kkkk..")
                     q.append(curr.left)
                 if curr.right:
+                    #print("..klklk..")
                     q.append(curr.right)
+            res.append(temp_lst)
+        return res
 
 
 
