@@ -5,9 +5,13 @@
 #         self.left = None
 #         self.right = None
 
-#Accepted on leetcode
-#Time Complexity - O(n) as we are traversing through every node
-#Space complexity - O(n) for queue
+#Is my Time complexity and Space complexity analysis correct? 
+
+#Accepted on Leetcode
+#Time complexity - O(N) as we traverse through every node of the tree
+#Space complexity - O(N) since we use a queue 
+
+from collections import deque
 
 class Solution(object):
     def levelOrder(self, root):
@@ -19,17 +23,17 @@ class Solution(object):
         #Edge case
         if root == None:
             return result
-        queue = []
+        queue = deque()
         queue.append(root)
         while(len(queue) > 0):
-            temp = []
+            level = []
             size = len(queue)
             for i in range(size):
-                curr = queue.pop(0)
-                temp.append(curr.val)
+                curr = queue.popleft()
+                level.append(curr.val)
                 if curr.left != None:
                     queue.append(curr.left)
                 if curr.right != None:
                     queue.append(curr.right)
-            result.append(temp)
+            result.append(level)
         return result
