@@ -10,7 +10,7 @@
 /* 102. Binary Tree Level Order Traversal
 Time Complexity: O(n) since each node is processed exactly once
 Space Complexity: O(n) to keep the output structure which keeps 'n' node values
-Approach: Iterative
+Approach: Iterative, Breadth First Search
 
 Initialize the queue with a root and start from level number 0.
 while the queue is not empty => calculate the queue size. Iterate over the size number of times, pop out these elements from the queue.
@@ -47,7 +47,7 @@ class Solution {
 
 Time Complexity: O(n) since each node is processed exactly once
 Space Complexity: O(n) to keep the output structure which keeps 'n' node values
-Approach: Recursive Approach
+Approach: Recursive Approach, Depth First Search
 
 Do the same thing level by level recursion
 */
@@ -60,20 +60,20 @@ class Solution {
         if(root == null)
             return result;
 
-        bfs(root, 0); // level 0
+        dfs(root, 0); // level 0
         return result;
     }
 
-    private void bfs(TreeNode root, int level){
+    private void dfs(TreeNode root, int level){
         if(root == null)
             return;
 
         if(result.size() == level)
-            result.add(new ArrayList<Integer>());
+            result.add(new ArrayList<Integer>()); // add a new temp list to the result for each level
 
         // get that temp list inside the result list for each level and add to that
         result.get(level).add(root.val);
-        bfs(root.left, level+1);
-        bfs(root.right, level+1);
+        dfs(root.left, level+1); // recurse over the left child
+        dfs(root.right, level+1);
     }
 }
