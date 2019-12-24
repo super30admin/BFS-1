@@ -10,7 +10,7 @@
 /**
 LeetCode Submitted : YES
 Time Complexity : O(N)
-Space Complexity : O(N)
+Space Complexity : O(width of the tree)
 
 The idea is to use Queue Data Structure such that it stores all adjacent nodes in the tree and thus using level order traversal we get the number of nodes at each level.
 
