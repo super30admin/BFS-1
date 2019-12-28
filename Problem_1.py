@@ -16,49 +16,18 @@ class Solution:
     def levelOrder(self, root):
         if not root:
             return []
-        
-        final_list = [None] * 10000
-        level = 0
-        queue = [root]
-        while queue:
-            size = len(queue)
-            level_list = []
-            for i in range(size):
-                element = queue.pop(0)
-                level_list.append(element.val)
-                if element.left:
-                    queue.append(element.left)
-                if element.right:
-                    queue.append(element.right)
-            final_list[level] = level_list
-            level += 1
-            
-        for f in range(len(final_list)):
-            if final_list[f] is None:
-                del final_list[f:]
-                break
-                
-        return final_list
-        
-
-class Solution:
-    def helper(self,root):
         final = []
-        current =  [root]
-        while current:
-            values = []    
-            level = []
-            for i in current:
-                values.append(i.val)
-                if i.left:
-                    level.append(i.left)
-                if i.right:
-                    level.append(i.right)
-            current = level
-            final.append(values)
-        return final
+        queue = [root]
         
-    def levelOrder(self, root):
-        if not root:
-            return []
-        return self.helper(root)
+        while queue:
+            temp = []
+            size = len(queue)
+            for _ in range(size):
+                popped = queue.pop(0)
+                temp.append(popped.val)
+                if popped.left:
+                    queue.append(popped.left)
+                if popped.right:
+                    queue.append(popped.right)
+            final.append(temp)
+        return final
