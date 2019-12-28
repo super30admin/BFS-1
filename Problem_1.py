@@ -1,9 +1,7 @@
 # Runs on Leetcode
+
 # Runtime - O(n)
 # Memory - O(n)
-
-# Almost same approaches with small changes
-
         
 # Definition for a binary tree node.
 # class TreeNode:
