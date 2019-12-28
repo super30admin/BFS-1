@@ -1,8 +1,12 @@
 # Runs on Leetcode
-# Runtime - O(n)
-# Memory - O(n)
-
 # BFS
+    # Runtime - O(n)
+    # Memory - O(n)
+# DFS
+    # Runtime - O(n)
+    # Memory - O(1)
+
+# BFS solution
 
 class Solution:
     def rightSideView(self, root):
@@ -23,6 +27,22 @@ class Solution:
             final.append(temp[-1])
         return final
         
-  # DFS
-  
-  
+# DFS solution
+
+class Solution:
+    def rightSideView(self, root):
+        if not root:
+            return []
+        self.final = []
+        self.dfs(root,0)
+        return self.final
+    
+    def dfs(self,root,depth):
+        # edge case
+        if len(self.final) == depth:
+            self.final.append(root.val)
+        # logic    
+        if root.right:
+            self.dfs(root.right,depth+1)
+        if root.left:
+            self.dfs(root.left,depth+1)
