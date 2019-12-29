@@ -1,3 +1,4 @@
+//BFS
 // Time Complexity - O(V+E) where V is the number of courses and the E is the number of prerequisites given in the input
 // Space Complexity - O(V+E) where V is the number of courses and the E is the number of prerequisites given in the input
 // This solution worked on LeetCode
