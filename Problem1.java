@@ -1,5 +1,6 @@
+// Using BFS
 // Time Complexity - O(n) where n is the number of nodes
-// Space Complexity - O(n) where n is the number of nodes
+// Space Complexity - O(h) where h is the height of the tree, since at one time maximum there will be nodes in queue equal to the height of the tree
 // This solution worked on LeetCode
 
 // We are implementing the Binary Tree Level Order Traversal using BFS where the queue is used to maintain the level order. queue size will be used to keep track of the width of the level. 
@@ -24,3 +25,4 @@ class Solution {
         return res;     //return the result list in the end after all the queue nodes are processed
     }
 }
+
