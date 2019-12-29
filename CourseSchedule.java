@@ -8,7 +8,7 @@
  * }
  */
  /**
- * Time Complexity: O(N)
+ * Time Complexity: O(V+E)
  * Space Complexity: O(N)
  * Accepted on Leetcode: Yes
  
