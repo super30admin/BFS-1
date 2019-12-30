@@ -1,5 +1,5 @@
 # Runs on Leetcode
-# Runtime - O(E) - E is edges
+# Runtime - O(V + E) - E is edges
 # Memory - O(n)
 
 '''
