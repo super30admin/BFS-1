@@ -29,7 +29,8 @@ class Solution {
 
 // DFS
 // Time Complexity - O(n)
-// Space Complexity - O(1) since we are not using any extra space apart from the recursion stack.
+// Space Complexity - O(1) if we are considering the space of the recursion stack.
+// Space will be O(d) depth of the tree if we consider the recursion stack memory
 // This solution worked on LeetCode
 // In this DFS solution, the root is processed and then it's right child is processed first since we have to get the right side view of the tree. Once the right childs are completed, we move to the left side. For adding node it is checked if the node depth is equal to the result size. If it is equal it means the node will be visible from right side view and the existing elements in the result list will not obstruct the view. If the depth is less than the result list size it means the elements in the result list will obstruct the view of this node. The recursive solution will process all the right children first and then all the left children of the tree. Similarly if we need the left view of the tree we will process all the left children first and then the right child nodes.
 
