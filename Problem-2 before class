@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+//Using BFS
+//Time : O(n)
+//Space: O(n)
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+    if(root==null) return new ArrayList<>();
+       List<Integer> list=new ArrayList<Integer>();
+        list.add(root.val);
+        int right=0;
+       Queue<TreeNode> q=new LinkedList<TreeNode>();
+        q.add(root);
+        while(!q.isEmpty())
+        {
+            //tracks each level size
+          int size=q.size();
+            //for loop will keep traversal of the level everytime
+            for(int i=0;i<size;i++)
+            {
+                TreeNode node=q.poll();
+                if(node.left!=null)
+                {
+                    q.add(node.left);
+                     right=node.left.val;
+                }
+               if(node.right!=null)
+                {
+                    q.add(node.right);
+                   right=node.right.val;
+                }
+            }
+            list.add(right);
+        }
+        list.remove(list.size()-1);
+        return list;
+    }
+}
