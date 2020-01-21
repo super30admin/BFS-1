@@ -8,6 +8,7 @@
 //
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
+// Stores the level info in the queue along with Treenode
 
 class Solution {
     List<List<Integer>> li = new ArrayList<>();
@@ -45,6 +46,57 @@ class Solution {
         }
         
         li.add(paths);
+        
+        return li;
+    }
+}
+
+
+// Time Complexity :
+//      n is the number of nodes in tree
+//      levelOrder() - O(n)
+//      
+// Space Complexity :
+//      levelOrder() - O(n)
+//
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Do not store level info in the queue
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> li = new ArrayList<>();
+        
+        if(root == null) return li;
+        
+        Queue<TreeNode> qu = new LinkedList<TreeNode>();
+        qu.offer(root);
+        
+        List<Integer> paths = new ArrayList<>();
+        
+        int size = qu.size();
+        
+        while(!qu.isEmpty())
+        {
+            TreeNode temp = qu.poll();
+            if(size > 0)
+            {
+                paths.add(temp.val);
+                --size;
+            }
+            
+            if(temp.left != null)
+                qu.offer(temp.left);
+            if(temp.right != null)
+                qu.offer(temp.right);
+            
+            if(size == 0)
+            {
+                li.add(paths);
+                size = qu.size();
+                paths = new ArrayList<>();
+            }
+        }
         
         return li;
     }
