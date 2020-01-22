@@ -1,5 +1,5 @@
 // Time complexity is O(N) as each node is being traversed
-// space complexity is O(1) as no extra space is used.
+// space complexity is O(N) as we are using queue data structure
 // This solution is submitted on leetcode
 import java.util.ArrayList;
 import java.util.LinkedList;
