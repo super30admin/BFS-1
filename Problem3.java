@@ -18,10 +18,12 @@ class Solution {
         Queue<TreeNode> qu = new LinkedList<>();
         qu.offer(root);
         
-        int s = qu.size();
+        int s = 1;
         
         while(!qu.isEmpty())
         {
+            s = qu.size();
+            
             for(int i=0 ; i < s; ++i)
             {
                 TreeNode node = qu.poll();
@@ -35,8 +37,6 @@ class Solution {
                 if(node.left != null)
                     qu.offer(node.left);
             }
-            
-            s = qu.size();
         }
         
         return li;
