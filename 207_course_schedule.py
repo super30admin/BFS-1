@@ -5,8 +5,8 @@ class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
                 https://leetcode.com/problems/course-schedule/
-                // Time Complexity : O(n)
-                // Space Complexity : O(n)
+                // Time Complexity : O(V * E)
+                // Space Complexity : O(V + E)
                 // Did this code successfully run on Leetcode : Yes
                 // Any problem you faced while coding this : No
                 // Three line explanation of solution in plain english :
