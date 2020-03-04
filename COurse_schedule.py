@@ -1,5 +1,5 @@
 BFS traversal
-Time complexity:O(n)
+Time complexity:O(number of vertices(no of prerequisites) + no of edges(no of courses having prerequisites.))
 space complexity:O(n)
 Ran on leetcode:Yes
 problems faced: took some time to figure the edge cases.
