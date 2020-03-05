@@ -5,7 +5,10 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-#BFS
+
+# BFS
+-------------------------------
+
 #Time :O(n)
 #Space :O(n)
 from collections import deque
@@ -29,3 +32,31 @@ class Solution:
                     queue.append(currrent.right)
             result.append(temp)
         return result
+
+    
+    
+#DFS
+#--------------------------------------------------
+  # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        self.result = []
+        if self.result == None:
+            return self.result
+        self.helper(root, 0)
+        return self.result
+            
+    def helper(self, root, level):
+        if(not root):
+            return
+        if(level == len(self.result)):
+            self.result.append([])
+        self.result[level].append(root.val)
+        self.helper(root.left, level + 1)
+        self.helper(root.right, level + 1)
