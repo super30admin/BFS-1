@@ -5,7 +5,9 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+#BFS
+#Time :O(n)
+#Space :O(n)
 from collections import deque
 class Solution:
 
