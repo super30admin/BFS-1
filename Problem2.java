@@ -1,42 +1,47 @@
-
-// Time: O(n)
-// Space: O(n)
-// Used queue to keep each and every level in mind. Then kept each level values in queue. Added the last element at each level in the result
-
 class Solution {
-    public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> result = new LinkedList<>();
-        Queue<TreeNode> q = new LinkedList<>();
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
 
-        if (root == null) {
-            return result;
+        HashMap<Integer, List<Integer>> hp = new HashMap<>();
+
+        for (int i = 0; i < numCourses; i++) {
+            hp.put(i, new LinkedList<>());
         }
 
-        q.add(root);
+        int[] indegree = new int[numCourses];
+
+        for (int[] tp : prerequisites) {
+            int course = tp[0];
+            int prerequisite = tp[1];
+
+            hp.get(prerequisite).add(course);
+            indegree[course]++;
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        int count = 0;
 
         while (!q.isEmpty()) {
-            int currentNumber = q.size();
-            List<Integer> currentLevel = new LinkedList<>();
+            int currentCourse = q.poll();
+            List<Integer> current = hp.get(currentCourse);
 
-            for (int i = 0; i < currentNumber; i++) {
-                TreeNode currentNode = q.poll();
-
-                if (currentNode.left != null) {
-                    q.add(currentNode.left);
-                }
-
-                if (currentNode.right != null) {
-                    q.add(currentNode.right);
-                }
-
-                if (i == currentNumber - 1) {
-                    result.add(currentNode.val);
+            for (int course : current) {
+                indegree[course]--;
+                if (indegree[course] == 0) {
+                    q.add(course);
                 }
             }
-
+            count++;
+        }
+        if (count == numCourses) {
+            return true;
         }
 
-        return result;
-
+        return false;
     }
 }
