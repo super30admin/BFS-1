@@ -36,8 +36,27 @@ Yes. Should I create a seperate class to create a queue, or is it okay to just i
                             q.put(curr.right)
                     result.append(temp)
                 return result
-
+                
 # Problem 2
+## Time Complexity :
+O()
+
+## Space Complexity :
+O()
+
+## Did this code successfully run on Leetcode :
+
+
+## Any problem you faced while coding this :
+
+
+## Your code here along with comments explaining your approach
+### Solution:
+
+
+
+
+# Problem 3
 ## Time Complexity :
 O(n)
 
@@ -74,7 +93,7 @@ No.
                     result.append(last)
                 return result
                 
-# Problem 2
+# Problem 3
 ## Time Complexity :
 O(n)
 
@@ -82,46 +101,28 @@ O(n)
 O(h)
 
 ## Did this code successfully run on Leetcode :
-No.\
-NameError: name 'result' is not defined.
+Yes.
 
 ## Any problem you faced while coding this :
 Yes. I have initialized global variable result. I even tried to access the global variable using global keyword, inside the function.
 
 ## Your code here along with comments explaining your approach
 ### Solution 2: DFS.
-            class Solution:
-                result=[]
-                def rightSideView(self, root: TreeNode) -> List[int]:
-                    #Edge Case
-                    if not root:
-                        return result
-                    self.dfs(root,0)
-                    return result 
+        class Solution:
 
-                def dfs(self,root: TreeNode, depth):
+            def rightSideView(self, root: TreeNode) -> List[int]:
+                def dfs(root: TreeNode, depth):
                     #Base Case
                     if not root:
-                        return result
+                        return self.result
                     #Logic
-                    if(depth==len(result)):
-                        result.append(root.val)
-                    self.dfs(root.right,depth+1)
-                    self.dfs(root.left,depth+1)
-
-  
-# Problem 3
-## Time Complexity :
-O()
-
-## Space Complexity :
-O()
-
-## Did this code successfully run on Leetcode :
-
-
-## Any problem you faced while coding this :
-
-
-## Your code here along with comments explaining your approach
-### Solution:
+                    if(depth==len(self.result)):
+                        self.result.append(root.val)
+                    dfs(root.right,depth+1)
+                    dfs(root.left,depth+1)
+                self.result=[]
+                #Edge Case
+                if not root:
+                    return self.result
+                dfs(root,0)
+                return self.result 
