@@ -9,7 +9,7 @@ O(1)
 Yes.
 
 ## Any problem you faced while coding this :
-Yes. Should I create a seperate class to create a queue, or is it okay to just import the library in python. In this problem, I have imported the queue library. Or can I use list as queue?
+No.
 
 ## Your code here along with comments explaining your approach
 ### Solution 1: BFS.
@@ -36,6 +36,41 @@ Yes. Should I create a seperate class to create a queue, or is it okay to just i
                             q.put(curr.right)
                     result.append(temp)
                 return result
+
+# Problem 1
+## Time Complexity :
+O(n)
+
+## Space Complexity :
+O(1)
+
+## Did this code successfully run on Leetcode :
+Yes.
+
+## Any problem you faced while coding this :
+Yes. I had problem with initializing variable globally and using it inside the function. So, after a few attempts, I created the function inside the function.
+
+## Your code here along with comments explaining your approach
+### Solution 2: DFS.
+        class Solution:
+            def levelOrder(self, root: TreeNode) -> List[List[int]]:
+                def helper(root: TreeNode,level):
+                    #Base Case
+                    if not root:
+                        return self.result
+                    #Logic
+                    if len(self.result)==level:
+                        self.result.append([])
+                    self.result[level].append(root.val)    
+                    helper(root.left,level+1)
+                    helper(root.right,level+1)
+                self.result=[]
+                #Edge case
+                if not root:
+                    return self.result
+                helper(root,0)
+                return self.result
+    
                 
 # Problem 2
 ## Time Complexity :
