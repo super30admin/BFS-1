@@ -139,7 +139,7 @@ O(h)
 Yes.
 
 ## Any problem you faced while coding this :
-Yes. I have initialized global variable result. I even tried to access the global variable using global keyword, inside the function.
+Yes. Yes. I had problem with initializing variable globally and using it inside the function. So, after a few attempts, I created the function inside the function.
 
 ## Your code here along with comments explaining your approach
 ### Solution 2: DFS.
