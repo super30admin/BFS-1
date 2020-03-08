@@ -1,3 +1,13 @@
+// inderee Array ==> for no of dependencies
+// Hashmap ==> children of each course
+// Queue
+
+
+// Time Complexity: O(V+E)
+
+// Space Complexity: O(V+E)
+
+
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         
