@@ -74,21 +74,47 @@ Yes. I had problem with initializing variable globally and using it inside the f
                 
 # Problem 2
 ## Time Complexity :
-O()
+O(V+E)
 
 ## Space Complexity :
-O()
+O(n)
 
 ## Did this code successfully run on Leetcode :
-
+Yes.
 
 ## Any problem you faced while coding this :
-
+No.
 
 ## Your code here along with comments explaining your approach
 ### Solution:
 
+                import queue
+                class Solution:
+                    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+                        outdegree = [0] * numCourses
+                        indegree = [[] for _ in range(numCourses)]
 
+
+                        for i in range(len(prerequisites)):
+                            outdegree[prerequisites[i][0]] += 1
+                            indegree[prerequisites[i][1]].append(prerequisites[i][0])
+
+                        q=queue.Queue()
+                        for i in range(len(outdegree)):
+                            if outdegree[i] == 0:
+                                q.put(i)
+
+                        children = []
+                        while not q.empty():
+                            course = q.get()
+                            children.append(course)
+                            if indegree[course]:
+                                for rest in indegree[course]:
+                                    outdegree[rest] -= 1
+                                    if outdegree[rest] == 0:
+                                        q.put(rest)
+
+                        return len(children) == numCourses
 
 
 # Problem 3
