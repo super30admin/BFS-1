@@ -1,7 +1,8 @@
 '''
-Time and space complexity; O(N)
+Time complexity: O(N)
+Space complexity: O(N) including the output
 Challenges: One of the test cases was failing when I used an incorrect operator in if condition.
-
+Comments: Given below
 '''
 
 # Definition for a binary tree node.
@@ -30,12 +31,12 @@ class Solution:
             # Append the value
             result[level].append(node.val)
 
-            # Next level - left and right nodes
+            # Next level - left and right nodes - call the function recursively
             if node.left:
                 recursive_helper(node.left, level + 1)
             if node.right:
                 recursive_helper(node.right, level + 1)
         
-        # Call the function
+        # Call the function and return the result
         recursive_helper(root, 0)
         return result
