@@ -1,6 +1,7 @@
 Time complexity: O(mn)
 Space complexity: O(mn)
 Did this code submitted successfully on leetcode: Yes
+Face any problem: Got confused with the map values, so implemented using queue.
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
