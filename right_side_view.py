@@ -1,6 +1,6 @@
 """
-// Time Complexity : O(V + E) 
-// Space Complexity : O(V + E)  //height of the tree
+// Time Complexity : O(n)
+// Space Complexity : O(maxDepth)
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
 // Your code here along with comments explaining your approach
