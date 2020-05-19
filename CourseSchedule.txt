@@ -1,0 +1,42 @@
+// Time Complexity : O(V+E)
+// Space Complexity : O(V+E)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+   
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        
+    int[][] matrix = new int[numCourses][numCourses]; //edges connection in the graph  to matrix
+    int[] indegree = new int[numCourses]; // indegree for each mcourse
+    
+    for (int i=0; i<prerequisites.length; i++) { // now traverse through pre array and for first value increment indegree
+        int in = prerequisites[i][0];
+        int out = prerequisites[i][1];
+        if (matrix[out][in] == 0)
+            indegree[in]++;    // increment incoming edge number
+        matrix[out][in] = 1; // edge exist between out and in
+    }
+    
+    int count = 0;
+    Queue<Integer> queue = new LinkedList();
+    for (int i=0; i<indegree.length; i++) { // teraverse through indegree array and add all values with indegree zero
+        if (indegree[i] == 0) queue.offer(i);
+    }
+    while (!queue.isEmpty()) {
+        int course = queue.poll(); // pop out item form queue
+        count++;
+        for (int i=0; i<numCourses; i++) { // add all its edges
+            if (matrix[course][i] != 0) { // if there is edge  then decrease the indegree
+                if (--indegree[i] == 0)
+                    queue.offer(i); // if indegree becones zero add it to queue
+            }
+        }
+    }
+    return count == numCourses;
+    
+    }
+
+}
+
+
