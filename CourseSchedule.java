@@ -38,7 +38,7 @@ class Solution {
 }
 
 // Time Complexity : O(V+E)
-// Space Complexity : O(V*(V+E)) (Will have V stack calls and each stack will have adjacency list of (V+E))
+// Space Complexity : O(V+(V+E)) (Will have V stack calls and each stack will have reference to the pointer of adjacency list of (V+E))
 // Did this code successfully run on Leetcode :
 // Three line explanation of solution in plain english
 class Solution {
