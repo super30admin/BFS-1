@@ -1,17 +1,21 @@
-//Did not run on leetcode successfully
+//Time Complexity-O(number of courses+No.of children)
+//Space Complexity-O(hashmap size)
+//Ran successfully on leetcode
+//3 point algo-
+	//have an indegree array to count the no. of prerequisites i.e. how many nodes come into a particular node
+    //Then we have a hashmap to maintain the node the list of its prerequisites
+    //If the indegree is 0, it measn that the course has no prerequisites and hence it can be taken first
+    //We maintain a queue for our bfs approach so that we can pop the node with 0 prereq and push its children.
+    //For every node we encounter in the queue, we reduce its count in the indegree array.
+	//If the indegree array has all 0s in the end, then we can say that all the courses can be completed.
 
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        //have an indegree array to count the no. of prerequisites i.e. how many nodes come into a particular node
-        //Then we have a hashmap to maintain the node the list of its prerequisites
-        //If the indegree is 0, it measn that the course has no prerequisites and hence it can be taken first
-        //We maintain a queue for our bfs approach so that we can pop the node with 0 prereq and push its children.
-        //For every node we encounter in the queue, we reduce its count in the indegree array.
-        //If the indegree array has all 0s in the end, then we can say that all the courses can be completed.
-        
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {        
         int indegree[numCourses];
         unordered_map<int,vector<int>>m;
+        for (int i = 0; i < numCourses; i++) // ...initialize it
+            indegree[i] = 0;
         for(int i=0;i<prerequisites.size();i++)
         {
             indegree[prerequisites[i][0]]++;
