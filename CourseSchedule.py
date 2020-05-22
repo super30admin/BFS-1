@@ -24,37 +24,43 @@ class CourseSchedule(object):
         :type prerequisites: List[List[int]]
         :rtype: bool
         """
-        if (prerequisites == None):     return True
+        if (prerequisites == None or len(prerequisites) == 0):
+            return True
 
-        indegrees = [0 for i in range(numCourses)]              # O(V) Space for indegrees array
+        requiredCourseCount = [0 for i in range(numCourses)]              # O(V) Space for indegrees array
 
-        children = {i: [] for i in range(numCourses)}           # O(E) Space for children mapping
+        prereqForCoursesList = { i : [] for i in range(numCourses) }           # O(E) Space for children mapping
 
         #   Update indegrees Array and children HashMap in parallel
-        for i in range(len(prerequisites)):
-            indegrees[prerequisites[i][0]] += 1
-            children[prerequisites[i][1]].append(prerequisites[i][0])
+        for prereq in prerequisites:
+            requiredCourseCount[prereq[0]] += 1
+            prereqForCoursesList[prereq[1]].append(prereq[0])
 
         #   initialize a queue
-        queue = deque()
+        queue = deque([])
 
         #   add all those courses having no dependency to the queue
-        for i in range(len(indegrees)):
-            if (indegrees[i] == 0):
-                queue.append(i)
+        for course in range(numCourses):
+
+            if (requiredCourseCount[course] == 0):
+                queue.append(course)
 
         #   iterate over the queue while updating indegrees and add a course to the queue whenever it has no prereqs
         while (len(queue) > 0):
 
-            prereqCourse = queue.popleft()
+            completedCourse = queue.popleft()
 
-            for child in children[prereqCourse]:
-                indegrees[child] -= 1
-                if (indegrees[child] == 0):
-                    queue.append(child)
+            for course in prereqForCoursesList[completedCourse]:
+
+                requiredCourseCount[course] -= 1
+
+                if (requiredCourseCount[course] == 0):
+                    queue.append(course)
 
         #   After the Queue being empty, if any indegree is greater than zero, just the courses can't be finished.
-        for i in range(len(indegrees)):
-            if (indegrees[i] != 0):     return False
+        for course in range(numCourses):
+
+            if (requiredCourseCount[course] != 0):
+                return False
 
         return True
