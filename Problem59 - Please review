@@ -1,0 +1,108 @@
+PROBLEM 1 -
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+        
+        var queue = [TreeNode]()
+        var result = [[Int]]()
+        
+        if root != nil { queue.append(root!) }
+        
+        var index = 0
+        
+        while index < queue.count {
+            var count = queue.count
+            var line = [Int]()
+            while index < count {
+                var node = queue[index]
+                if node.left != nil { queue.append(node.left!) }
+                if node.right != nil { queue.append(node.right!) }
+                line.append(node.val)
+                index += 1
+            }
+            result.append(line)
+        }
+        return result
+    }
+}
+
+PROBLEM 2 -
+// Time Complexity :O(n*2)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    
+    func canFinish(_ numCourses: Int, _ prerequisites: [[Int]]) -> Bool {
+        
+        if numCourses <= 0 { return true }
+        
+        var graph = [Set<Int>](repeating: Set<Int>(), count: numCourses)
+        for i in 0..<prerequisites.count {
+            let course = prerequisites[i][0]
+            let prereq = prerequisites[i][1]
+            graph[prereq].insert(course)
+        }
+        
+        var indegree = [Int](repeating: 0, count: numCourses)
+        for i in 0..<numCourses {
+            for index in graph[i] {
+                indegree[index] += 1
+            }
+        }
+        
+        for i in 0..<numCourses {
+            var index: Int = 0
+            while index < numCourses {
+                if indegree[index] == 0 { break }
+                index += 1
+            }
+            
+            if index == numCourses { 
+                return false
+            }
+            
+            //Make sure we do not visit this guy any more.
+            indegree[index] = -666
+            
+            for pre in graph[index] {
+                indegree[pre] -= 1
+            }
+        }
+        return true
+    }
+    
+}
+
+PROBLEM 3 - 
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+
+class Solution {
+    func rightSideView(_ root: TreeNode?) -> [Int] {
+        guard let root = root else { return [] }
+        
+        var result = [Int]()
+        var queue = [(root, 0)]
+        while queue.count > 0 {
+            let (node, level) = queue.removeFirst()
+            if level < result.count {
+                result[level] = node.val
+            } else {
+                result.append(node.val)
+            }
+            if let left = node.left {
+                queue.append((left, level + 1))
+            }
+            if let right = node.right {
+                queue.append((right, level + 1))
+            }
+        }
+        return result
+    }
+}
+
