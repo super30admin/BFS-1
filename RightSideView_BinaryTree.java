@@ -63,3 +63,31 @@ public class RightSideView_BinaryTree {
         dfs(root.right, level + 1);
     }
 }
+
+/*
+    // another method for DFS traversal
+
+    List<Integer> res  =  new ArrayList<>();
+    public List<Integer> rightSideView(TreeNode root) {
+        
+        dfs(root, 0);
+        return res;
+        
+    }
+    
+    private void dfs(TreeNode root, int level){
+        
+        // base
+        
+        if (root == null) return;
+        // logic 
+        
+        if( res.size() ==  level){
+            res.add(root.val);
+        }
+       
+        dfs(root.right, level + 1);
+        dfs(root.left,level +1);
+        
+    }
+*/
