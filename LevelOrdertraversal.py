@@ -8,6 +8,11 @@
 //Time Complexity: O(n)
 //Space Complexity: O(2power(h)) or O(n)
 // Did it run on Leet Code: Yes
+    
+// loop untill the queue is empty.
+//find the length of the queue and loop through the queue nodes and those elements to the result.
+//for each node of the queue add their left and right elements to the queue.
+//
 class Solution(object):
     def levelOrder(self, root):
         """
