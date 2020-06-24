@@ -1,0 +1,59 @@
+//Time Complexity : O(n)
+// Space Complexity :O(n) 
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+
+class Solution {
+public:
+    bool dfs_helper(int node, map<int,vector<int>> &graph, map<int, bool> &visited, map<int, bool> &cycles ){
+            vector<int> nbrs =graph[node];
+            
+            visited[node]=true;
+            cycles[node]=true;
+            
+            for(int i=0; i<nbrs.size(); i++){
+                if(visited[nbrs[i]]==false){
+                    bool is_cycle = dfs_helper(nbrs[i],graph, visited,cycles);
+                    if(is_cycle) return true;
+                }
+                else if(cycles[nbrs[i]]==true){
+                    return true;
+                }
+            }
+        
+            cycles[node]=false;
+            return false;
+
+    } 
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        map<int,vector<int>> graph;
+        
+        map<int, bool> visited;
+        map<int, bool> cycles;
+        
+        //add nodes
+        for(int i=0; i<numCourses; i++){
+            graph[i]={};
+            visited[i]=false;
+            cycles[i]=false;
+        }
+        
+        //add edges
+        for(int i=0; i<prerequisites.size(); i++){
+            int src = prerequisites[i][1];
+            int dst = prerequisites[i][0];
+            
+            graph[src].push_back(dst);
+        }
+        
+        for(auto it = graph.begin(); it!=graph.end(); it++){
+            int g_node = it->first;
+            bool is_cycle = dfs_helper(g_node,graph,visited,cycles);
+            if(is_cycle) return false;
+        }
+        
+        return true;
+        
+    }
+};

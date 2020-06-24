@@ -1,0 +1,57 @@
+//Time Complexity : O(n)
+// Space Complexity :O(h) (DFS solution)
+// Space Complexity :O(d) (BFS solution)
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+
+class Solution {
+public:
+    /*void helper(TreeNode* root, int level, vector<vector<int>> &res ){
+        if(root==NULL) return;
+        
+        if(res.size()==level){
+            vector<int> temp;
+            res.push_back(temp);
+        }
+       
+        res[level].push_back(root->val);
+        helper(root->left, level+1, res);
+        helper(root->right, level+1, res);
+        
+    }
+    
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        //using DFS
+        vector<vector<int>> res;
+        if(root==NULL) return res;
+        
+        helper(root, 0, res);
+        return res;*/
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        //using BFS
+        vector<vector<int>> res;
+        if(root==NULL) return res;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(q.empty()==false){
+            int size= q.size();
+            
+            vector<int> temp;
+            for(int i=0; i<size; i++){
+                TreeNode* n = q.front();
+                q.pop();
+                temp.push_back(n->val);
+                if(n->left!=NULL){
+                    q.push(n->left);
+                }
+                if(n->right!=NULL){
+                    q.push(n->right);
+                }
+            }
+            res.push_back(temp);
+        }
+        
+        return res;
+        
+    }
+};
