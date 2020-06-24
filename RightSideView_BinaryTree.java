@@ -33,4 +33,33 @@ public class RightSideView_BinaryTree {
         }
         return res;
     }
+
+   
+    List<List<Integer>> result =  new ArrayList();
+    public List<Integer> rightSideView_using_DFS(TreeNode root) {
+        
+        dfs(root, 0);
+        for(List<Integer> l : result){
+            res.add(l.get(l.size()-1));
+        } 
+        return res;
+        
+    }
+    
+    private void dfs(TreeNode root, int level){
+        
+        // base
+        
+        if (root == null) return;
+        // logic 
+        //  if size== level then add list 
+        if( result.size() ==  level){
+            result.add(new ArrayList<>());
+        }
+        
+        result.get(level).add(root.val);
+        
+        dfs(root.left,level +1);
+        dfs(root.right, level + 1);
+    }
 }
