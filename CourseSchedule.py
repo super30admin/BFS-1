@@ -26,5 +26,5 @@ class Solution:
                 return False
             
         return True
- Time complexity is O(n)
+ Time complexity is O(V+E)
  Space is O(n) because of Hashmap
