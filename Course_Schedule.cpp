@@ -1,10 +1,9 @@
-# BFS-1
-# Problem 1
-Binary Tree Level Order Traversal (https://leetcode.com/problems/binary-tree-level-order-traversal/)
+// Time Complexity :O(V+E)
+// Space Complexity :O(V+E)
+// V-> Number of vertex E - Number of Edges
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
-
-# Problem 2
-Course Schedule (https://leetcode.com/problems/course-schedule/)
 
 class Solution {
 public:
@@ -33,7 +32,7 @@ public:
                 count[it]--;
                 if(count[it] ==0)
                     q.push(it);
-            }   
+            }
         }
         for(int i=0;i<count.size();i++){
             if(count[i]>0){
@@ -44,6 +43,3 @@ public:
 
     }
 };
-
-# Problem 3
-Binary Tree Right Side View (https://leetcode.com/problems/binary-tree-right-side-view/)
