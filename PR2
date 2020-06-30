@@ -1,0 +1,51 @@
+// Time Complexity : O(V+E)- where V is the number of vertices and E is the number of Edges.
+// Space Complexity : O(V+E)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : N0 
+
+
+// Your code here along with comments explaining your approach : BFS approach. First, iterate through the graph.calculate the in degree and add add all this data to the HashMap. We calculate the in degree to start from a node with zero dependency.Start by adding these to the queue and adding it's children to the queue while decreasing the in degree. At the end if the in degree of any of the nodes is greater than 0, it means that we cannot complete all the courses. Return false. Else, return true.
+
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if(prerequisites==null || prerequisites.length==0) return true;
+        int[] indegree=new int[numCourses];
+        Map<Integer,List<Integer>> hmap=new HashMap<Integer,List<Integer>>();
+        for(int i=0;i<prerequisites.length;i++){
+            indegree[prerequisites[i][0]]++;
+            if(!hmap.containsKey(prerequisites[i][1])){
+                hmap.put(prerequisites[i][1],new ArrayList<>());
+            }
+                hmap.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+       Queue<Integer> q= new LinkedList<>(); 
+        for(int i=0;i<numCourses;i++){
+           if(indegree[i]==0) q.add(i);
+        } 
+            while(!q.isEmpty()){
+                int curr=q.poll();
+                List<Integer> children=hmap.get(curr);
+                System.out.println(children);
+                if(children!=null){
+                  for(int child : children){
+                      System.out.println(child);
+                    indegree[child]--;
+                     System.out.println(child);
+                    if(indegree[child]==0){
+                        q.add(child);
+                    }
+                }    
+            }
+  
+        }
+        
+        for(int i=0;i<indegree.length;i++){
+            if(indegree[i]>0){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
