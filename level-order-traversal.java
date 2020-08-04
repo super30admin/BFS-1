@@ -1,7 +1,7 @@
 // Time Complexity : O(n)
-// Space Complexity : O(1)
+// Space Complexity : O(n) as n/2 leaf nodes
 // Did this code successfully run on Leetcode : Yes
-// Any problem you faced while coding this : Just needed some time to decide data structure needed.
+// Any problem you faced while coding this :
 
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
