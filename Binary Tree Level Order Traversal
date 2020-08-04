@@ -1,0 +1,45 @@
+Aproach 1 :
+Time Complexity :
+Space Complexity :
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root: return []
+        q = collections.deque()
+        q.append(root)
+        res = []
+        while q:
+            size = len(q)
+            layer = []
+            for i in range(size):
+                node = q.popleft()
+                layer.append(node.val)
+                
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            res.append(layer)
+        return res
+        
+   Approach 2:
+   Time Complexity :
+   Space Complexity :
+def solution(self, root):
+    res = []
+    self.dfs(root, 0, res)
+    return res
+    
+def dfs(self, root, level, res):
+    if not root:
+        return 
+    if len(res) < level+1:
+        res.append([])
+    res[level].append(root.val)
+    self.dfs(root.left, level+1, res)
+    self.dfs(root.right, level+1, res)
