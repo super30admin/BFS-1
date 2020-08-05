@@ -26,8 +26,8 @@ class Solution:
         return result
   
   Approach 2 : DFS
-  Time COmplexity :
-  Space Complexity:
+  Time COmplexity : O(N)
+  Space Complexity: O(N)
   class Solution(object):
     def rightSideView(self, root):
         """
