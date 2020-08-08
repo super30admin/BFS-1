@@ -1,6 +1,6 @@
 Aproach 1 :
-Time Complexity :
-Space Complexity :
+Time Complexity :O(N)
+Space Complexity : O(N)
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -28,8 +28,8 @@ class Solution:
         return res
         
    Approach 2:
-   Time Complexity :
-   Space Complexity :
+   Time Complexity : O(N)
+   Space Complexity : O(W) ---- > Width of the tree
 def solution(self, root):
     res = []
     self.dfs(root, 0, res)
