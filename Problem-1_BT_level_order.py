@@ -47,7 +47,7 @@ class Solution:
  
 # APPROACH 2: DFS - Iterative 
 # Time Complexity : O(n), n: number of nodes in BT
-# Space Complexity : O(n)
+# Space Complexity : O(h), h: height of BT
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
 #
