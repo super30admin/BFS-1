@@ -111,7 +111,8 @@ class Solution:
 # Space Complexity : O(D) - diameter of tree
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : None
- 
+
+##BFS 
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):
@@ -138,4 +139,31 @@ class Solution:
                 de.append((cn.left, cl+1))
         return  res       
 
+## DFS : TC : O(n), SC : O(H)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+from collections import deque
+class Solution:
+    def rightSideView(self, root: TreeNode) -> List[int]:
+        
+        if not root:
+            return []
+        self.ans = []
+        self.dfs(root,0)
+        return self.ans
+    
+    def dfs(self, node, level):
+        #base
+        if not node:
+            return     
+        # logic
+        if level == len(self.ans):
+            self.ans.append(node.val)
+        self.dfs(node.right, level+1)
+        self.dfs(node.left, level+1)
+ 
