@@ -10,7 +10,7 @@ class CourseSchedule {
             return true;
         
         // 1. incomingEdges ==> keeps track of incoming edges ==> figure out starting point
-        int[] incomingEdges = new int[numCourses.length];
+        int[] incomingEdges = new int[numCourses];
         
         // 2. Constructing the graph and incomingEdges[]
         HashMap<Integer, List<Integer>> graph = new HashMap<>();
@@ -18,10 +18,10 @@ class CourseSchedule {
             int first = edge[0];
             int second = edge[1];
             
-            incomingedges[first]++; 
+            incomingEdges[first]++; 
             
-            if(!graph.contains(second)){
-                graph.put(second,new Arraylist());
+            if(!graph.containsKey(second)){
+                graph.put(second,new ArrayList());
             }
             graph.get(second).add(first);
         }
@@ -42,8 +42,8 @@ class CourseSchedule {
         
         while(!q.isEmpty()){
             int front = q.poll();
-            if(graph.contains(front)){
-                for(x : graph.contains(front)){
+            if(graph.containsKey(front)){
+                for(int x : graph.get(front)){
                     incomingEdges[x]--;
                     if(incomingEdges[x] == 0)
                         q.add(x);
