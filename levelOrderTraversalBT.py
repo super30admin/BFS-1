@@ -72,6 +72,7 @@ class Solution:
     
         # while queue is not empty maintain size of queue at all levels and keep adding all nodes in the queue level wise
         # if popped node's left or right exist: add them to the queue in that order
+        
         while queue:
             size = len(queue)
             temp = []
