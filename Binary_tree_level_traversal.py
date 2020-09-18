@@ -1,3 +1,8 @@
+Time complexity- O(N) + O(H)- stack memory      
+Space complexity- O(H) for recursion and O(BReadth) for iterartive
+
+
+
 # DFS- approach- using stack- recursion
 
 # Definition for a binary tree node.
@@ -23,9 +28,7 @@ class Solution:
         
         self.dfs(root.left, result, depth+1)
         self.dfs(root.right, result, depth+1)
-        
-Time complexity- O(N) + O(H)- stack memory      
-Space complexity- O(H) for recursion and O(BReadth) for iterartive
+
 
 
 
