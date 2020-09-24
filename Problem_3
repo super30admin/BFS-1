@@ -1,0 +1,63 @@
+// Time Complexity : O(n) where n is the number of nodes in the tree
+// Space Complexity : O(n) where n is the number of leaf nodes in the tree
+// Did this code successfully run on Leetcode : Yes
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> li = new ArrayList<>();
+        if(root == null) return li;
+        LinkedList<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty()){
+            li.add(q.getLast().val);
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                TreeNode node = q.poll();
+                if(node.left != null)
+                    q.add(node.left);
+                if(node.right != null)
+                    q.add(node.right);
+            }
+        }
+        return li;
+    }
+    
+  // Time Complexity : O(n) where n is the number of nodes in the tree
+  // Space Complexity : O(h) where h is the height of the tree
+  // Did this code successfully run on Leetcode : Yes
+
+    public List<Integer> rightSideViewRecursion(TreeNode root) {
+        List<Integer> li = new ArrayList<>();
+        if(root == null) return li;
+        helper(root, li, 0);
+        return li;
+    }
+    public void helper(TreeNode root, List<Integer> li, int level){
+        if(root == null) return;
+        
+        if(li.size() == level) 
+            li.add(root.val);
+        else{
+            li.set(level, root.val);
+        }
+        helper(root.left, li, level + 1);
+        helper(root.right, li, level + 1);
+        
+    }
+}
