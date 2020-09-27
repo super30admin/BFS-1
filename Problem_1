@@ -1,5 +1,5 @@
 // Time Complexity : O(n) where n is the number of nodes in the tree
-// Space Complexity : O(h) where h is the number of leaf nodes in the tree
+// Space Complexity : O(h) where h is the maximun number of nodes in any level
 // Did this code successfully run on Leetcode : Yes
 
 /**
