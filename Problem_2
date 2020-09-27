@@ -1,5 +1,5 @@
-// Time Complexity : O(n) where n is the number of courses
-// Space Complexity : O(n+m) where m is maximum number of edges
+// Time Complexity : O(n+m) where n is the number of courses and m is maximum number of edges that is the prerequisites
+// Space Complexity : O(n+m)  
 // Did this code successfully run on Leetcode : Yes
 
 class Solution {
