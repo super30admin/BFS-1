@@ -1,3 +1,7 @@
+// Time Complexity : O(n) where n is the number of nodes in the tree
+// Space Complexity : O(h) where h is the number of leaf nodes in the tree
+// Did this code successfully run on Leetcode : Yes
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -35,6 +39,11 @@ class Solution {
         }
         return li;
     }
+    
+    // Time Complexity : O(n) where n is the number of nodes in the tree
+    // Space Complexity : O(h) where h is the height of the tree
+    // Did this code successfully run on Leetcode : Yes
+    
     public List<List<Integer>> levelOrderRecursion(TreeNode root) {
         List<List<Integer>> li = new ArrayList<>();
         helper(root, li, 0);
