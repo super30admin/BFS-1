@@ -1,0 +1,38 @@
+// Time Complexity : O(n+m) where n is the number of courses and m is maximum number of edges that is the prerequisites
+// Space Complexity : O(n+m)  
+// Did this code successfully run on Leetcode : Yes
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] inDegree = new int[numCourses];
+        
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for(int i = 0; i < prerequisites.length; i++){
+            int start = prerequisites[i][1], end = prerequisites[i][0];
+            inDegree[end]++;
+            if(!graph.containsKey(start)){
+                graph.put(start, new ArrayList<>());
+            }
+            graph.get(start).add(end);
+        }
+        Queue<Integer> q = new LinkedList<>();
+        int count = 0;
+        
+        for(int i = 0; i < numCourses ; i++){
+            if(inDegree[i] == 0) q.add(i);
+        }
+        
+        while(!q.isEmpty()){
+            int node = q.poll();
+            if(graph.containsKey(node)){
+                for(int child : graph.get(node)){
+                    if(--inDegree[child] == 0){
+                        q.add(child);
+                    }  
+                }    
+            }
+            count++;
+        }
+        return count == numCourses;
+    }
+}
