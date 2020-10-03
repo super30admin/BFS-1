@@ -14,6 +14,8 @@
  * }
  */
 //DFS
+//TC: O(n)
+//SC: O(h)
 class Solution {
     List<Integer> result;
     public List<Integer> rightSideView(TreeNode root) {
@@ -34,6 +36,8 @@ class Solution {
 }
 
 //DFS
+//TC: O(n)
+//SC: O(h)
 class Solution {
     List<Integer> result;
     public List<Integer> rightSideView(TreeNode root) {
@@ -58,6 +62,8 @@ class Solution {
 }
 
 //BFS
+//TC: O(n)
+//SC: O(n/2)
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList();
