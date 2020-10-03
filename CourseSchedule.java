@@ -1,4 +1,4 @@
-//confused about TC that why it would be E+V and not E*V
+//TC: E+V
 //SC: E+V
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
