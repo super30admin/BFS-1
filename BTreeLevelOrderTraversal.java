@@ -14,6 +14,8 @@
  * }
  */
 //BFS
+//TC: O(n)
+//SC: O(n/2)
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList();
@@ -38,6 +40,8 @@ class Solution {
 }
 
 //DFS
+//TC: O(n)
+//SC: O(h)
 class Solution {
     List<List<Integer>> result;
     public List<List<Integer>> levelOrder(TreeNode root) {
