@@ -1,3 +1,7 @@
+import java.util.logging.Level;
+
+import javax.swing.text.View;
+
 Q1: Level order traversal
 
 Logic: traverse every level and add all the nodes on the level using BFS.Queue will be used
@@ -85,3 +89,35 @@ class Solution {
     return false;
  }
 }
+
+
+Idea: similar to level order.Just have to add last element at every Level
+
+Q3. Right Side View
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        if(root == null) return result;
+        
+        //add root
+        q.add(root);
+        TreeNode current = null;
+        //iterate over tree
+        while(!q.isEmpty()){
+            int size = q.size();
+            List<Integer> level = new ArrayList<Integer>();
+            for(int i=0;i<size;i++){
+             current = q.poll();
+                level.add(current.val);
+                if(current.left!=null) q.add(current.left);
+                if(current.right!=null) q.add(current.right);
+            }
+           result.add(current.val);
+        }
+        return result;  
+        }
+    }
+
+
