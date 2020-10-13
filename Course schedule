@@ -8,10 +8,12 @@ class Solution {
         int[] indegree = new int[numCourses];
         
         // create graph
+        
+        // initailize the graph
         for(int[] pair : prereq){
             map.put(pair[1], new HashSet<Integer>());
         }
-        
+       // create the graph 
         for(int[] pair : prereq){
             Set<Integer> set = map.get(pair[1]);
             set.add(pair[0]);
@@ -25,7 +27,8 @@ class Solution {
         
         int num = 0;
         Queue<Integer> que = new LinkedList<>();
-        
+       
+       // initailize the que which courses having indegree zero
         for(int i =0; i< indegree.length; i++){
             if(indegree[i] == 0){
                 que.add(i);
@@ -33,6 +36,7 @@ class Solution {
         }
         System.out.println(que);
     
+    //By making indegree of the  courses == 0, we check if all courses can be completed
         while(! que.isEmpty()){
             int size = que.size();
             for(int i =0; i<size; i++){
