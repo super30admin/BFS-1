@@ -1,0 +1,57 @@
+// [0, 1][3, 2],[3,1]
+// Time complexity: O(E+V^2); space complexity: O(E+V)
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prereq) {
+        if(prereq.length == 0) return true;
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+      //  Map<Integer, Integer> indegree = new HashMap<>();
+        int[] indegree = new int[numCourses];
+        
+        // create graph
+        
+        // initailize the graph
+        for(int[] pair : prereq){
+            map.put(pair[1], new HashSet<Integer>());
+        }
+       // create the graph 
+        for(int[] pair : prereq){
+            Set<Integer> set = map.get(pair[1]);
+            set.add(pair[0]);
+            map.put(pair[1], set);
+            indegree[pair[0]]++;
+        }
+        
+        System.out.println(map);
+        for(int i : indegree)
+        System.out.println(i);
+        
+        int num = 0;
+        Queue<Integer> que = new LinkedList<>();
+       
+       // initailize the que which courses having indegree zero
+        for(int i =0; i< indegree.length; i++){
+            if(indegree[i] == 0){
+                que.add(i);
+            }
+        }
+        System.out.println(que);
+    
+    //By making indegree of the  courses == 0, we check if all courses can be completed
+        while(! que.isEmpty()){
+            int size = que.size();
+            for(int i =0; i<size; i++){
+                int node = que.poll();
+                num++;
+                if(! map.containsKey(node) || map.get(node) == null) continue;
+                for(int course : map.get(node)){
+                    indegree[course]--;
+          //     indegree.put(course, degree);
+                if(indegree[course] == 0){
+                    que.add(course);
+                }
+            }
+            }
+        }
+        return num == numCourses ? true : false;
+    }
+}
