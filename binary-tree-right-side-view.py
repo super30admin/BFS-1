@@ -1,3 +1,7 @@
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Approach: Follow a level order traversal. At every level, add the last node of the level to the result.
+# This gives the right view of the tree.
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
