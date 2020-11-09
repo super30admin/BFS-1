@@ -4,4 +4,6 @@ func main() {
 	MainLevelOrder()
 
 	MainCourseSchedule()
+
+	MainRightSideView()
 }
