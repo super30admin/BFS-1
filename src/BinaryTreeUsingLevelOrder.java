@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Queue;
 
 
-public class BFSUsingLevelOrder {
+public class BinaryTreeUsingLevelOrder {
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> result = new ArrayList<>();
 
