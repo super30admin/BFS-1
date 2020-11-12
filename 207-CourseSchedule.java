@@ -1,5 +1,5 @@
 /**LC-207
- * Time Complexity : O(N) 
+ * Time Complexity : O(V+E) 
  * Space Complexity : Not sure 
  * Did this code successfully run on Leetcode : Yes
  * Any problem you faced while coding this : No

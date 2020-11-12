@@ -6,10 +6,8 @@
  *
  Algorithm:
  1. If root == null return result
- 2. Created a recursive function dfs which will go till any of the node located at the most depth
- 3. At any given node, check the level and the resultant array
- 4. if level == result.size, create a new list and add it to the result
- 5. Now in that list, insert the elements according to their level
+ 2. Used the size variable to keep track of the level
+ 3. The last element in for each level's size will be stored in last variable.
  */
 /**
  * Definition for a binary tree node.
