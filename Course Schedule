@@ -1,0 +1,57 @@
+// Time Complexity: O(m*n) || O(N^2) --> matrix size ???
+// Space Complexity: O(V+E)
+
+// Approach: Idea is make decision based on indegrees and using HashMap to store course and it's prerequisites;
+//Queue is used for BFS traverse and update course prerequisites: i.e List<Integer> in hashMap 
+//Can also be solved without using HashMap - check leetcode solutions for hint;
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        if(numCourses==0){
+            return true;
+        }
+        
+        // Decision on BFS vs DFS ??
+        HashMap<Integer, List<Integer>> hmap = new HashMap<>();
+        Queue<Integer> que = new LinkedList<>();
+        
+        //Array for indegreee
+        int[] indegree = new int[numCourses];
+        
+        for(int i = 0 ; i < prerequisites.length ; i++){
+            indegree[prerequisites[i][0]]++;        //Increasing indegree
+            if(!hmap.containsKey(prerequisites[i][1])){
+                hmap.put(prerequisites[i][1],new ArrayList<>());
+            }
+                hmap.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+       
+        //Adding independent elements to queue
+        for(int i =0 ; i < indegree.length ; i++){
+            if(indegree[i]==0){
+                que.add(i);
+            }
+        }
+  
+        while(!que.isEmpty()){
+            int temp = que.poll();
+            List<Integer> lst = hmap.get(temp);
+            if(lst!=null){
+                for(int child : lst) {   
+                    indegree[child]--;
+                    if(indegree[child]==0){
+                        que.add(child);
+                    }
+                }
+            }
+        }
+        
+        //Scanning indegree array to verify there are no indegrees left . i.e. no cycles
+        for(int i = 0 ; i < indegree.length ;i++){
+            if(indegree[i]>0){
+                return false;
+            }
+        }
+        return true;
+    }
+}

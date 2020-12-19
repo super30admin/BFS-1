@@ -1,0 +1,38 @@
+//Time Complexity: O(n)
+//Space Complexity: O(n)
+
+//Approach: Idea is to use queue and for iterative addition of elements of tree.
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root==null){
+            return result;
+        }
+        Queue<TreeNode> que = new LinkedList<>();
+        que.add(root);
+        
+        while(!que.isEmpty()){
+            int size = que.size(); 
+            List<Integer> lst = new ArrayList<>();
+            
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = que.poll();
+               
+                if(curr.left!=null){
+                    que.add(curr.left);
+                }
+                
+                if(curr.right!=null){
+                    que.add(curr.right);
+                }
+                
+                lst.add(curr.val);
+            }
+                result.add(lst);
+        }
+        
+        return result;
+        
+    }
+}
