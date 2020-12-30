@@ -48,3 +48,60 @@ class Solution {
         return true;
     }
 }
+
+class Solution {
+    HashMap<Integer, List<Integer>> graph = new HashMap<>();
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        
+        // bulid the map
+        for(int i=0;i<prerequisites.length;i++) {
+            if(!graph.containsKey(prerequisites[i][1])) {
+                graph.put(prerequisites[i][1], new ArrayList<>());
+            }
+            graph.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+        
+        boolean[] checked = new boolean[numCourses];
+        
+        boolean[] path = new boolean[numCourses];
+        
+        for(int i=0;i<numCourses;i++) {
+            if(checkCycle(i, checked, path)) {
+                return false;
+            }
+        }
+        
+        return true;        
+    }
+    
+    private boolean checkCycle(int i, boolean[] checked, boolean[] path) {
+        if(checked[i]) {
+            return false;
+        }
+        
+        if(path[i]) {
+            return true;
+        }
+        
+        if(!graph.containsKey(i)) {
+            return false;
+        }
+        
+        path[i] = true;
+        
+        boolean res = false;
+        
+        for(int child : graph.get(i)) {
+            res = checkCycle(child, checked, path);
+            if(res)
+                break;
+        }
+        
+        path[i] = false;
+        
+        checked[i] = true;
+        
+        return res;
+    }
+}
