@@ -1,0 +1,37 @@
+from collections import defaultdict
+class Solution:
+    
+    def iscycle(self,node,graph,visited,recursivestack):
+        visited[node]=True;
+        recursivestack[node] = True;
+        for neighbor in graph[node]:
+            if(not visited[neighbor]):
+                if(self.iscycle(neighbor,graph,visited,recursivestack)):
+                    return True;
+            elif(recursivestack[neighbor]):
+                return True;
+        recursivestack[node] = False;
+        return False;
+    
+                
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph=defaultdict(list)
+        visited={}
+        recursivestack={}
+        for i in range(numCourses):
+            graph[i]=[];
+            visited[i] = False;
+            recursivestack[i] = False;
+            
+        for x,y in prerequisites:
+            graph[y].append(x);
+        for key in visited.keys():
+            if(not visited[key]):
+                if(self.iscycle(key,graph,visited,recursivestack)):
+                    return False;
+        return True;
+            
+        
+        
+            
+        
