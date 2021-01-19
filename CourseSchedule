@@ -1,0 +1,61 @@
+/*
+TC: O(N) We are building the graph and indegree array and then also in Queue we are traversing every element
+based on its indegree value
+SC: O(N) we are using hashmap,Queue and indegree array;
+
+thought process: this problem is topological sort problem. As soon as the question asked about directed graph
+all we had to do was check if the graph is forming cycle. If the graph is cyclic then topological sort
+cannot be applied to it. If it is cyclic then the courses cannot be finished.
+ */
+class CourseSchedule{
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        HashMap<Integer,LinkedList<Integer>> graph = buildGraph(numCourses,prerequisites);
+        int indegree[] = buildIndegree(numCourses,prerequisites);
+
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++){
+            if (indegree[i] == 0){
+                q.offer(i);
+            }
+        }
+
+        int count = 0;
+        while (!q.isEmpty()){
+            int curr = q.poll();
+            count++;
+            for (int neigh : graph.get(curr)){
+                indegree[neigh]--;
+                if (indegree[neigh] == 0){
+                    q.offer(neigh);
+                }
+            }
+        }
+
+        return numCourses == count;
+
+    }
+
+    private int[] buildIndegree(int numCourses, int[][] prerequisites){
+        int indegree[] = new int[numCourses];
+
+        for (int course[] : prerequisites){
+            int main = course[0];
+            indegree[main]++;
+        }
+        return indegree;
+    }
+
+    private HashMap<Integer,LinkedList<Integer>> buildGraph(int numCourses, int[][] prerequisites){
+        HashMap<Integer,LinkedList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < numCourses; i++){
+            map.put(i, new LinkedList<Integer>());
+        }
+        for (int course[] : prerequisites){
+            int main = course[0];
+            int pre = course[1];
+            map.get(pre).add(main);
+        }
+        return map;
+    }
+}
