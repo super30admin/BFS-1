@@ -12,6 +12,7 @@ class Solution:
             IS:
                 - directed graph ...'
                 things to ask: build a graph based on given input? visited set necessary?
+                DID DFS WAY.. will put BFS approach later
         """
         if len(prerequisites)  == 0:
             return True
@@ -20,7 +21,7 @@ class Solution:
         holder = [0] * (numCourses)
         for i in range(len(prerequisites)):
             holder[prerequisites[i][0]] += 1
-        #delare and build stack
+
         stack = [] 
         for i in range(0,len(holder)):
             if holder[i] == 0:
