@@ -1,0 +1,44 @@
+public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int indegrees [] = new int [numCourses];
+        HashMap<Integer,List<Integer>> map = new HashMap<>();
+        Queue<Integer> q = new LinkedList<>();
+        
+        //add key , val to map where key is course and val which courses will be effected on completion
+        for(int [] edges:prerequisites){
+            if(!map.containsKey(edges[1])) {
+                map.put(edges[1],new ArrayList<>());
+            }
+            map.get(edges[1]).add(edges[0]);
+            indegrees[edges[0]]++;
+        }
+        
+        //add independent nodes to queue 
+        for(int i = 0; i<indegrees.length; i++) {
+            if(indegrees[i] == 0){
+                q.add(i);
+            }
+        }
+        
+        if(q.isEmpty()) return false;
+        
+        int noOfCoursesTaken = 0;
+        
+        while(!q.isEmpty()) {
+            int c = q.poll();
+            //counter to consider no of course taken !
+            noOfCoursesTaken++;
+            List<Integer> edges = map.get(c);
+            //possibility that none of the course depending
+            if(edges != null) {
+            	//reduce by one and check indegrees val. If it is zero add to queue
+                for(int edge: edges) {
+                    indegrees[edge]--;
+                    if(indegrees[edge] == 0) {
+                        q.add(edge);
+                    }
+                }
+        }
+            
+        }
+        return noOfCoursesTaken == numCourses;
+    }
