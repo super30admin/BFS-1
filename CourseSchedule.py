@@ -1,3 +1,6 @@
+#Time - 0(n)
+#Space - 0(m+n) m - number of prerequisites, n - num of courses
+
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
