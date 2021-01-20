@@ -1,0 +1,56 @@
+//BFS
+//time complexity - o(n)
+//space complexity - o(n) -> 2^l , l - level -> n/2 -> n
+
+List<List<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+        
+        //FIFO
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()) {
+            //no of nodes in the next level
+            int size = q.size();
+            List<Integer> temp = new ArrayList<>();
+            //run the loop for particular level and add node vals to list
+            for(int i=0; i<size;i++) {
+                TreeNode node = q.poll();
+                temp.add(node.val);
+                //add left and right nodes of the root in queue for next traversal
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            result.add(temp);
+        }
+        return result;
+        
+        
+        
+        //DFS
+        //time complexity - o(n) - nodes of the tree
+		//space complexity - o(h) - height of the tree (aux space)
+        class Solution {
+     List<List<Integer>> result;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        result = new ArrayList<>();
+        if(root == null) return result;
+        dfs(root,0);
+        return result;
+    }
+    
+    private void dfs(TreeNode root,int level) {
+        //base
+        if(root == null) return;
+        //logic
+        if(result.size() == level) {
+            List<Integer> temp = new ArrayList<>();
+            temp.add(root.val);
+            result.add(temp);
+        } else {
+            result.get(level).add(root.val);
+        }
+        dfs(root.left,level+1);
+        dfs(root.right,level+1);
+    }
+}
