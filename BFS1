@@ -1,0 +1,27 @@
+/**
+* Time complexity = O(n) as we are traversing each node
+* Space complexity = 2 ^ h or n/2 which will be max level nodes
+*/
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        List<List<Integer>> result=new ArrayList<>();
+        if(root==null) return result;
+        Queue<TreeNode> q=new LinkedList();
+        q.add(root);
+        
+        while(!q.isEmpty()){
+            int size=q.size();
+            List<Integer> sublist=new ArrayList();
+            for(int i=0;i<size;i++){
+            TreeNode current=q.poll();
+            sublist.add(current.val);
+            if(current.left!=null) q.add(current.left);
+            if(current.right!=null) q.add(current.right);
+        }
+            result.add(sublist);
+            
+        }
+        return result;
+    }
+}
