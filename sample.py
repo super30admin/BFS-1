@@ -53,30 +53,26 @@ class Solution:
         Approach:
         1. Create a lead degree array and adjucancy hashmap
         2. add items to queue (to check dependency)
-        
-        """
+        """       
+	
         from collections import deque
         
         if len(prerequisites) == 0: return True
-        course_dict = {}; ndegrees = [0]*numCourses; count = 0
+        ndegrees = [0]*numCourses; count = 0
+        course_dict = {i: [] for i in range(numCourses)}; 
+        
         for edge in prerequisites:
-            if not edge[1] in course_dict.keys():
-                course_dict[edge[1]] = [edge[0]]
-            else:
-                course_dict[edge[1]].append(edge[0])
+            course_dict[edge[1]].append(edge[0])
             ndegrees[edge[0]] += 1
-                
+        
         queue = deque()
-        for i in range(len(ndegrees)):
-            if ndegrees[i] == 0: queue.append(ndegrees[i])
-                
-        while len(queue) != 0:
+        for i, course in enumerate(ndegrees):
+            if course == 0: queue.append(i)
+
+        while queue:
             curr = queue.popleft(); count += 1
             for k in course_dict[curr]:
                 ndegrees[k] -= 1
-                if ndegrees[k] == 0: queue.append(ndegrees[k])
-                    
-        if count == numCourses: return True
-        return False
-                    
-        
+                if ndegrees[k] == 0: queue.append(k)
+
+        return count == numCourses
