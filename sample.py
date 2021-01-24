@@ -76,3 +76,70 @@ class Solution:
                 if ndegrees[k] == 0: queue.append(k)
 
         return count == numCourses
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    
+    """
+    Description: Given a binary tree, return values from top to bottom looking from right side of it
+    
+    Time Complexicity: O(n) {using either BFS or DFS}
+    Space Complexicity: O(n) or O(h) {BFS and DFS respectively}
+    
+    Approach:
+    Using BFS:
+    Use level order traversal of the binary tree and return right most node
+    append the node to a resulting list
+    
+    Using DFS:
+    
+    """
+    
+    # Solution Using BFS
+    def rightSideView(self, root: TreeNode) -> List[int]:
+    
+        from collections import deque
+        
+        result = []
+        if root == None: return result
+        
+        queue = deque()
+        queue.append(root)
+        
+        while len(queue) != 0:
+            temp = [];
+            for i in range(len(queue)):
+                currNode = queue.popleft()
+                temp.append(currNode.val)
+                if currNode.left: queue.append(currNode.left)
+                if currNode.right: queue.append(currNode.right)
+            result.append(temp[-1])
+            
+        return result
+    
+    # Solution Using DFS
+    def rightSideView(self, root: TreeNode) -> List[int]:
+        
+        self.result = []
+        self.dfs(root, 0)
+        
+        return self.result
+    
+    def dfs(self, root, depth):
+
+        # Base case
+        if root == None: return
+        # Logic
+        if depth == len(self.result):
+            self.result.append(root.val)
+        else:
+            self.result[depth] = root.val
+        
+        self.dfs(root.left, depth + 1)
+        self.dfs(root.right, depth + 1)
