@@ -1,6 +1,6 @@
 
-// Time Complexity : O(n) where n is number of elements
-// Space Complexity : O(1) we are not using extra space
+// Time Complexity : O(n) where n is number of elements as we are traversing for each element
+// Space Complexity : O(n) actually it is 2^h the last row will have worst case scenario n/2 so its O(n)
 // Did this code successfully run on Leetcode :yes
 // Did this code successfully run on Home system :No i got errors
 //          Problem1_BinaryTreeLevelOrderTraversal.cpp:120:30: error: use of undeclared identifier 'levelOrder'
