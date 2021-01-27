@@ -1,3 +1,6 @@
+// TC- O(n) where n is the number of nodes in tree.
+// SC - O(n/2) 
+
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
