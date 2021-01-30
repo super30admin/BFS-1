@@ -1,3 +1,6 @@
+//TC - O(v+e) where v is vertices and e is edges.
+//SC - max(O(v+e)
+
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int[] indegrees = new int [numCourses];
