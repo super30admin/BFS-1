@@ -1,21 +1,41 @@
-// Time-complexity:O(n)
-// Space complexity:O(n)
-// Ran succesfully on leetcode:No
+// Time-complexity:O(V+E)
+// Space complexity:O(V+E)
+// Ran succesfully on leetcode:Yes
 // Solution with approach:
-//I created an aray with number of courses and marked -1 whenever a course with some prerequisite comes, in the end if there are courses remaining.
-//But i ma not sure why is it not passing all test cases.
+//Created a graph witht the help of hashmap and added all courses required for a prequisite by their couunt in array and did a BFS while 
+//decreasing the count in array.
 class Solution {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int[] arr=new int[numCourses];
-        int count=0;
-        for(int i=0;i<prerequisites.length;i++)
-        {
-            if(arr[prerequisites[i][0]]!=-1)
-            {
-                count++;
-                arr[prerequisites[i][0]]=-1;
+            public boolean canFinish(int numCourses, int[][] prerequisites) {
+                HashMap<Integer,List<Integer>> map= new HashMap<>();
+                int[] arr= new int[numCourses];
+                for(int[] x: prerequisites)
+                {   if(!map.containsKey(x[1]))
+                        map.put(x[1],new LinkedList<>());
+                    map.get(x[1]).add(x[0]);    
+                    arr[x[0]]++;            
+                }
+                
+                Queue<Integer> q = new LinkedList<>();
+                
+                for(int i=0;i<numCourses;i++)
+                    if(arr[i]==0)
+                        q.add(i);
+                
+                while(!q.isEmpty())
+                {
+                    int key = q.poll();
+                    if(map.containsKey(key)){
+                        for (int i : map.get(key)){
+                            arr[i]--;
+                            if(arr[i]==0)   
+                                q.add(i);
+                        }
+                    }
+                }
+                for(int x: arr)
+                    if(x!=0)
+                        return false;
+                
+                return true;
             }
         }
-        return count<numCourses ? true: false;
-    }
-}
