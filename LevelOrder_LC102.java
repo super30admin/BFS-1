@@ -1,6 +1,11 @@
-/**
+/** BFS
 T: o(n) - each node is visited once
 S: breadth of queue - O(n/2) -> O(n)
+
+
+DFS: 
+T: O(n) - each node is visited once
+S: O(d) depth of the tree
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -15,6 +20,8 @@ S: breadth of queue - O(n/2) -> O(n)
  *     }
  * }
  */
+
+//using bfs
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
@@ -42,5 +49,33 @@ class Solution {
             result.add(level);
         }
         return result;
+    }
+}
+
+//using dfs
+class Solution2 {
+    List<List<Integer>> result;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        result = new ArrayList<>();
+        //edge case
+        if(root == null) return result;
+        
+        dfs(root, 0);
+        return result;
+    }
+    
+    private void dfs(TreeNode root, int level){
+        //base case
+        if(root == null) return;
+        //logic
+        if(level == result.size()){
+            result.add(new ArrayList<>());
+        }
+        
+        //add the root for corresponding level
+        result.get(level).add(root.val);
+        
+        dfs(root.left, level+1);
+        dfs(root.right, level+1);      
     }
 }
