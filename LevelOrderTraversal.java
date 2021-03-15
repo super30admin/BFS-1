@@ -16,7 +16,7 @@
 class LevelOrderTraversal {
     
     // Time Complexity: O(n)    (where n -> no. of nodes in the tree)
-    // Space Complexity: O(h)   (where h -> height of the tree)
+    // Space Complexity: O(n)
     
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
