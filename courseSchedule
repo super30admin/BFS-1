@@ -1,0 +1,55 @@
+// Time Complexity :O((E + V)) - we are touching each vertex and for each vetrex traversing every vertex
+// Space Complexity : O(V x E) 
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+intializing the data structure involved
+
+// Your code here along with comments explaining your approach
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        
+        boolean finish =true;
+        
+        HashMap<Integer, List<Integer>> adjList = new HashMap<>();
+        int[] indegree = new int[numCourses];
+        Arrays.fill(indegree, 0);
+        
+        for (int[] pre : prerequisites)
+        {
+            indegree[pre[0]] += 1;
+            if(!adjList.containsKey(pre[1]))
+                adjList.put(pre[1], new ArrayList<>());
+            
+            adjList.get(pre[1]).add(pre[0]);
+            
+        }
+        
+        Queue<Integer> q = new LinkedList();
+        for(int i=0; i<numCourses; i++)
+        {
+            if(indegree[i] == 0)
+                q.add(i);
+        }
+        
+        int count = 0; // number of courses with indegree 0
+        
+        while(!q.isEmpty())
+        {
+            int course = q.poll();
+            count++;
+            List<Integer> requisites = adjList.get(course);   
+            if(requisites != null)
+            {
+                for(int i=0; i<requisites.size(); i++)
+                {
+                    indegree[requisites.get(i)] --;
+                    if(indegree[requisites.get(i)] == 0)
+                        q.add(requisites.get(i));
+                }
+            }
+            
+        }
+        
+       return (count == numCourses) ? true: false;
+    }
+}
