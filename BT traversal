@@ -1,0 +1,99 @@
+// Time Complexity : O(n) in both as it touches all nodes
+// Space Complexity : bfs - O(2^l) where l is level dfs - O(h) where h - height of tree
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+bfs - queue 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null)
+            return result;
+        
+        Queue<TreeNode> bfsQ = new LinkedList<>();
+        
+        bfsQ.add(root);
+        
+        while(!bfsQ.isEmpty())
+        {
+            int size = bfsQ.size();
+            List<Integer> level = new ArrayList<>();
+            for(int i=0; i< size; i++)
+            {
+                TreeNode temp = bfsQ.poll();
+                level.add(temp.val);
+                if(temp.left != null)
+                    bfsQ.add(temp.left);
+                if(temp.right != null)
+                    bfsQ.add(temp.right);
+            }
+            result.add(level);
+        }
+        return result;
+    }
+}
+
+dfs - recursive stack
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<List<Integer>> result;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+         result = new ArrayList<>();
+        
+        if(root == null)
+            return result;
+        
+        dfs(root, 0);
+        return result;
+    }
+    
+    private void dfs(TreeNode root, int level)
+    {
+        //base
+        if(root == null)
+            return;
+        
+        //logic
+        if(level == result.size())
+        {
+            result.add(new ArrayList<>());
+            
+        }
+        result.get(level).add(root.val);
+        dfs(root.left, level+1);
+        dfs(root.right, level+1);
+    }
+}
