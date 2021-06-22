@@ -1,6 +1,7 @@
 class Solution {
 public:
-   
+   //O(E) space
+   //O(v+e) time
       bool canFinish(int n, vector<vector<int>>& prerequisites) {
         vector<vector<int>> G(n);
         vector<int> degree(n, 0), bfs;
