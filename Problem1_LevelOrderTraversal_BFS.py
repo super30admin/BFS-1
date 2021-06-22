@@ -31,23 +31,24 @@ S30 SlackID : RN32MAY2021
 #         self.val = val
 #         self.left = left
 #         self.right = right
+import collections
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         result = []
-        if root = None:
+        if root is None:
             return result
-        queue = []
+        queue = collections.deque()
         queue.append(root)
         while len(queue) > 0:
             size = len(queue)
             li = []
             for i in range(size):
-                curr = queue.pop(0)
-                li.add(curr.val)
+                curr = queue.popleft()
+                li.append(curr.val)
                 if curr.left:
                     queue.append(curr.left)
                 if curr.right:
                     queue.append(curr.right)
-            result.add(li)
+            result.append(li)
         return result
     
