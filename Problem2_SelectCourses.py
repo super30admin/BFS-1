@@ -31,37 +31,38 @@ S30 SlackID : RN32MAY2021
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        course_map = {}
+        self.course_map = {}
         for i in range(len(prerequisites)):
-            if prerequisites[i][1] not in course_map:
-                course_map[prerequisites[i][1]] = [prerequisites[i][0]]
+            if prerequisites[i][1] not in self.course_map:
+                self.course_map[prerequisites[i][1]] = [prerequisites[i][0]]
             else:
-                course_map[prerequisites[i][1]].append(prerequisites[i][0])
+                self.course_map[prerequisites[i][1]].append(prerequisites[i][0])
         
-        path = [False] * numCourses
-        visited = [False] * numCourses
+        self.path = [False] * numCourses
+        self.visited = [False] * numCourses
         # print(course_map)
         
         for i in range(numCourses):
-            if not self.canFinishHelper(i, course_map, path, visited):
+            if self.hasCycle(i):
                 return False
         return True
     
-    def canFinishHelper(self, course:int, course_map:dict, path:List[bool], visited:List[bool]) -> bool:
-        if visited[course]:
+    def hasCycle(self, course:int) -> bool:
+        if self.path[course]:
             return True
 
-        if path[course]:
+        if self.visited[course]:
             return False
+
         else:
-            path[course] = True
-            result = True
-            if course in course_map:
-                for required_course in course_map[course]:
-                    result = self.canFinishHelper(required_course, course_map, path, visited)
-                    if not result:
-                        return False
+            self.path[course] = True
+            result = False
+            if course in self.course_map:
+                for required_course in self.course_map[course]:
+                    result = self.hasCycle(required_course)
+                    if result:
+                        return True
             
-            path[course] = False
-            visited[course] = True
+            self.path[course] = False
+            self.visited[course] = True
             return result
