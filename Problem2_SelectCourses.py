@@ -38,30 +38,30 @@ class Solution:
             else:
                 course_map[prerequisites[i][1]].append(prerequisites[i][0])
         
-        cycle_starting_here = [False] * numCourses
+        path = [False] * numCourses
         visited = [False] * numCourses
         # print(course_map)
         
         for i in range(numCourses):
-            if not self.canFinishHelper(i, course_map, cycle_starting_here, visited):
+            if not self.canFinishHelper(i, course_map, path, visited):
                 return False
         return True
     
-    def canFinishHelper(self, course:int, course_map:dict, cycle_starting_here:List[bool], visited:List[bool]) -> bool:
+    def canFinishHelper(self, course:int, course_map:dict, path:List[bool], visited:List[bool]) -> bool:
         if visited[course]:
             return True
 
-        if cycle_starting_here[course]:
+        if path[course]:
             return False
         else:
-            cycle_starting_here[course] = True
+            path[course] = True
             result = True
             if course in course_map:
                 for required_course in course_map[course]:
-                    result = self.canFinishHelper(required_course, course_map, cycle_starting_here, visited)
+                    result = self.canFinishHelper(required_course, course_map, path, visited)
                     if not result:
                         return False
             
-            cycle_starting_here[course] = False
+            path[course] = False
             visited[course] = True
             return result
