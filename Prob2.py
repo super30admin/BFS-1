@@ -1,5 +1,5 @@
 #Time complexity for put and get: O(V+E)
-#Space complexity: O(1)
+#Space complexity: O(V+E)
 # Did this code successfully run on Leetcode : Yes
 # Any problem you faced while coding this : No
 
