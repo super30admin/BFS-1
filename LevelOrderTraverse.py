@@ -1,6 +1,6 @@
 # Time Complexity : O(N) 
 # Space Complexity :    O(N)
-# Did this code successfully run on Leetcode : NO - Code editor locked
+# Did this code successfully run on Leetcode : YES
 # Any problem you faced while coding this : NO
 
 
