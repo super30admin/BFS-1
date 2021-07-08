@@ -1,7 +1,7 @@
 class LevelOrder {
 
     //Time Complexity: O(V + E)
-    //Space Complexity; 
+    //Space Complexity: O(V + E)
 
     public List<List<Integer>> levelOrder(TreeNode root) {
 
