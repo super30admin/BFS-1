@@ -42,3 +42,31 @@ class Solution {
         return result;
     }
 }
+
+//TimeComplexity: O(N)
+//Space Complexity: O(N) ; extra space
+
+class Solution {
+    ArrayList<List<Integer>> result;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        result = new ArrayList<List<Integer>>();
+        if(root==null){
+            return result;
+        }
+        helper(root,0);
+        return result;
+    }
+    public void helper(TreeNode root, int level){
+
+        if(root==null)
+            return;
+        if(level == result.size()){
+            List<Integer> ls = new ArrayList<>();
+            result.add(ls);
+        }
+        result.get(level).add(root.val);
+        helper(root.left,level+1);
+        helper(root.right,level+1);
+
+    }
+}
