@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Queue;
 
 public class LevelOrderTraversal {
+	/*
+	 * Perform BFS - 1 level at a time using the current size of queue before
+	 * processing each level nodes
+	 */
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> ans = new ArrayList<>();
 		if (root == null) {

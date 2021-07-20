@@ -28,6 +28,15 @@ public class CourseSchedule {
 		}
 	}
 
+	/*
+	 * Use topological sort to check if the given set of courses form a DAG. Start
+	 * with courses which have no incoming edges, by adding them to a queue. Process
+	 * each node from the queue. While processing, reduce the indegrees of all its
+	 * adjacent nodes by 1. If the indegree of any adjacent node becomes 0, all its
+	 * prerequisites have been completed. It can now be processed too. Add it to the
+	 * queue. If all courses have been processed, then all the courses can be
+	 * completed.
+	 */
 	public boolean topologicalSort(int numCourses) {
 
 		Queue<Integer> queue = new LinkedList<Integer>();
