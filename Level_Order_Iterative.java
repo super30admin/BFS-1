@@ -28,6 +28,4 @@ class Solution {
        }
        return result;
    }
-}class Level_Order_Iterative {
-    
 }
