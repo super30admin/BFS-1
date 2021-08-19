@@ -9,7 +9,7 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  Time complexity = O(N)
- Space complexity = O(1)
+ Space complexity = O(N)
  */
 class Solution {
 public:
