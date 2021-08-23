@@ -18,6 +18,7 @@
 7) this is an example of topological sort.
 */
 
+import java.util.*;
 
 class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
@@ -36,7 +37,7 @@ class CourseSchedule {
             indegree[edge[0]]++;
             if(!map.containsKey(edge[1]))
             {
-                map.put(edge[1],new ArrayList());
+                map.put(edge[1],new ArrayList<>());
             }
             
             map.get(edge[1]).add(edge[0]);
