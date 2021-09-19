@@ -1,5 +1,5 @@
-// Time Complexity : O(n), We traverse once through the linked list.
-// Space Complexity : O(1), No extra space is created.
+// Time Complexity : V+E, Total number of vertices(Courses) + Total number of edges(Dependencies)
+// Space Complexity : V+E= E(Edges space for hashmap) + V(Vertices for indegrees list as well as queue) 
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : Wasn't able to get clean code(Too many errors before correction)
 
