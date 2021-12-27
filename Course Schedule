@@ -1,0 +1,56 @@
+class Solution {
+    // Time Complexity --> O(Vertices + Edges)
+    // Space Complexity --> O(Vertices + Edges)
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        if(numCourses == 0){
+            return true;
+        }
+        queue<int> q;
+        map<int,vector<int>> dependentCourses;
+        vector<int> Indegrees(numCourses,0);
+        for(int i = 0; i<prerequisites.size(); i++){
+            Indegrees[prerequisites[i][0]]++;
+        }
+        for(vector<int> edge: prerequisites){
+            if(dependentCourses.find(edge[1]) == dependentCourses.end()){
+                vector<int> v;
+                dependentCourses[edge[1]] = v;
+            }
+            dependentCourses[edge[1]].push_back(edge[0]);
+        }
+        for(int i=0; i<Indegrees.size(); i++){
+            if(Indegrees[i] == 0){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int front = q.front();
+            q.pop();
+            vector<int> temp= dependentCourses[front];
+            for(int i =0; i< temp.size(); i++){
+                Indegrees[temp[i]]--;
+                if(Indegrees[temp[i]] == 0){
+                    q.push(temp[i]);
+                }
+            }
+        }
+         for(int i=0; i<Indegrees.size(); i++){
+             //cout<< Indegrees[i]<<endl;
+            if(Indegrees[i] != 0){
+                 return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+
+
+
+
+
+
+
+
