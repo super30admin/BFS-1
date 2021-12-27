@@ -1,0 +1,28 @@
+class Solution {
+    // Time complexity --> O(N)
+    // Space Complexity -->O(N)
+public:
+    vector<int> result;
+    queue<TreeNode*> q;
+    void dfs(TreeNode* root){
+     if(root == NULL){
+         return;
+     }
+     if(root->left != NULL){
+         dfs(root->left);
+     }
+      result.push_back(root->val);
+      if(root->right != NULL){
+         dfs(root->right);
+      }
+        
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(root == NULL){
+            return result;
+        }
+        q.push(root);
+        dfs(root);
+        return result;
+    }
+};
