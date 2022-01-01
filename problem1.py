@@ -1,5 +1,5 @@
 # Time Complexity : O(n)
-# Space Complexity : O(n)
+# Space Complexity : O(d) d is height of tree
 
 # Did this code successfully run on Leetcode : 
 # YEs
@@ -8,7 +8,7 @@
 
 # Your code here along with comments explaining your approach
 
-#Binary Search Approach
+
 
 #recursion
 class Solution:
