@@ -1,5 +1,7 @@
-# Time Complexity : 
+# Time Complexity : O(V + E) where V is the number of vertices and E is the number of edges.
 # Space Complexity : 
+#   O(V) worst case a recursion could explore all nodes and the stack will hold them all. 
+#   Hence, stack, visited, and checked have O(3V) = O(V) where V is the number of vertices or numCourses.
 # Did this code successfully run on Leetcode : 
 # Any problem you faced while coding this :
 
