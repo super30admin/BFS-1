@@ -1,6 +1,6 @@
 Solution 1 - BFS - Using queue - 
               TC - O(n) where n - no of nodes
-              SC - O(total leaf nodes) = O(2 ^ (height of tree - 1))
+              SC - O(total leaf nodes) = O(2 ^ (height of tree - 1)) or O(n/2) where n - no of nodes
 
 /**
  * Definition for a binary tree node.
