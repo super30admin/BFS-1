@@ -1,6 +1,6 @@
 '''
-TC: O(E) - edges in graph
-SC: O(V) - nodes in graph
+TC: O(V + E) - edges in graph
+SC: O(V + E) - nodes in graph
 '''
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
