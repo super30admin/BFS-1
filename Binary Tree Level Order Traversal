@@ -1,4 +1,4 @@
-Solution 1 - Using queue - 
+Solution 1 - BFS - Using queue - 
               TC - O(n) where n - no of nodes
               SC - O(total leaf nodes) = O(2 ^ (height of tree - 1))
 
@@ -48,7 +48,7 @@ class Solution {
     }
 }
 
-Solution 2 - Using Recursion
+Solution 2 - DFS - Using Recursion
               TC - O(n)
               SC - O(n)
 
