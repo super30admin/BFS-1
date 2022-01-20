@@ -1,3 +1,4 @@
+//BFS
 //create a queue and add root and iterate over queue size to get the same level nodes, and pop the parent to temp; then add its children
 //tc: O(n) where n is no.of nodes
 //sc: n/2 --> O(n) max leaf nodes or 2^(l-1) where l is level
