@@ -1,0 +1,56 @@
+BFS - 
+          TC - O(V+ E) where V - no of vertices, E - no of edges
+          SC - O(V+ E) where V - no of vertices, E - no of edges
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        Queue<Integer> q = new LinkedList<>();  // courses that will be processed will be stored in this
+        int[] indegree = new int[numCourses];   // check how many dependencies are present for each courses
+        HashMap<Integer, List<Integer>> map = new HashMap<>();  // for adjacency list
+        
+        for(int[] edge: prerequisites)
+        {
+            indegree[edge[0]]++;
+            if(!map.containsKey(edge[1]))
+            {
+                map.put(edge[1], new ArrayList<>());
+            }
+            map.get(edge[1]).add(edge[0]);
+        }
+        
+        int count = 0;
+        
+        for(int i = 0; i < numCourses; i++)
+        {
+            if(indegree[i] == 0)
+            {
+                q.add(i);
+                count++;
+            }
+        }
+        
+        if(count == numCourses)
+            return true;
+        
+        while(!q.isEmpty())
+        {
+            int poppedNode = q.poll();
+            List<Integer> dependentNodes = map.get(poppedNode);
+            if(dependentNodes != null)
+            {
+                for(int node: dependentNodes)
+                {
+                    indegree[node]--;
+                    if(indegree[node] == 0)
+                    {
+                        q.add(node);
+                        count++;
+                    }
+                }
+            }
+        
+        }
+        return count == numCourses;
+        
+    }
+}
