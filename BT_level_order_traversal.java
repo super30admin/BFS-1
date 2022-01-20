@@ -74,7 +74,6 @@ public class BT_level_order_traversal {
         TreeNode t3 = new TreeNode(3, t9, t20);
 
         System.out.println("BT_level_order_traversal: " + new BT_level_order_traversal().levelOrderUsingBFS(t3));
-//        System.out.println("Can all the courses be completed? : " + canFinish(2, new int[][]{{1,0}, {0,1}}));
     }
 
 }
