@@ -1,0 +1,74 @@
+
+//Time complexity: O(N)
+//Space complexity: O(N)
+
+
+public List<List<Integer>> levelOrder(TreeNode root) {
+	Queue<TreeNode> queue = new LinkedList<>();
+	List<List<Integer>> list = new ArrayList<>();
+	if(root == null) return list;
+	queue.add(root);
+
+	while(!queue.isEmpty()) {
+		List<Integer> tempList = new ArrayList<>();
+		int size = queue.size();
+		for(int i = 1; i <= size; i++) {
+			TreeNode node = queue.poll();
+
+			tempList.add(node.val);
+			if(node.left != null) 
+				queue.add(node.left);
+			if(node.right != null) 
+				queue.add(node.right);
+		}
+		list.add(new ArrayList<>(tempList));
+	}
+
+	return list;
+}
+
+
+
+//Time complexity : O(E+V)
+//Space complexity : O(E+V)
+
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        int[] indegree = new int[numCourses];
+        for(int[] edge : prerequisites) {
+            graph.get(edge[1]).add(edge[0]);
+
+            indegree[edge[0]]++;
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < numCourses; i++) {
+            if(indegree[i] == 0){
+                q.offer(i);
+            }
+        }
+
+        int count = 0;
+        while(!q.isEmpty()) {
+            int s = q.poll();
+            for(int adj : graph.get(s)) {
+                indegree[adj]--;
+                count++;
+                if(indegree[adj] == 0) {
+                    q.offer(adj);
+                }
+            }
+        }
+
+        return count == prerequisites.length;
+    }
+}
+
+
+
