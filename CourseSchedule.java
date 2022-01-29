@@ -3,8 +3,11 @@
 import java.util.*;
 
 //BFS
-//T.C - V+E
-//S.C - V+E
+
+// Time Complexity : V+E
+// Space Complexity : V+E
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 public class CourseSchedule {
     public static void main(String[] args) {
         int numCourses = 6;
