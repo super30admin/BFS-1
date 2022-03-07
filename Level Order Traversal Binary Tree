@@ -1,0 +1,49 @@
+//TC = O(n) n-> no. of nodes
+//SC = O(n)
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        List<List<Integer>> result = new ArrayList<>();
+        
+        if(root == null){
+            return result;
+        }
+        
+        //Two queue, one is curr and other is next
+        Queue<TreeNode> curr = new LinkedList<>();  
+        curr.add(root);
+        List<Integer> currLevel = new ArrayList<>();  //for maintaining popped nodes from queue
+            
+        Queue<TreeNode> next = new LinkedList<>();
+        
+        while(!curr.isEmpty()){
+            TreeNode node = curr.remove();  //popped
+            currLevel.add(node.val);  //added
+            
+            //adding left and right nodes in the queue
+            if(node.left != null){
+                next.add(node.left);
+            }
+            if(node.right != null){
+                next.add(node.right);
+            }
+            
+            
+            if(curr.isEmpty()){
+                
+                //now curr queue is empty then add all maintained node levels in result
+                result.add(currLevel);
+                currLevel = new ArrayList<>(); //initializing currLevel for the new empty list
+                
+                //now current queue equal to next queue
+                curr = next;  
+                next = new LinkedList<>();
+            }
+            
+        }
+        
+        
+        return result;
+        
+    }
+}
