@@ -3,6 +3,10 @@
 // Did this code successfully run on Leetcode : yes
 // Any problem you faced while coding this : no
 
+// Approach: Create an adjacency list and indegree array. Add the nodes with indegree as
+// 0 to the queue. Every time we complete a course, we pop that node from queue, check the
+//  adjacency list and find the dependent courses. For those dependents, we reduce the indegree
+// value and update them to the queue if their indegree is 0. I
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
