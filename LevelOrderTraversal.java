@@ -56,4 +56,31 @@ public class LevelOrderTraversal {
         }
         return result;
     }
+
+    // This will use DFS traversal to print the elements in BFS way
+    public List<List<Integer>> levelOrderUsingDFS(TreeNode root) {
+        result = new ArrayList<>();
+        if(root == null) return result;
+
+        dfs(root,0);
+        return result;
+    }
+
+    // Strategy-
+    // For each level, check the number of lists in the result
+    // If it matches that means we don't have a list to hold the current level. Level starts at 0
+    // So, for each level create a new list if it doesn't exist else point to existing one and append the current level element to that list
+    private void dfs(TreeNode root, int level) {
+        // Base condition
+        if(root == null) return;
+
+        if(level == result.size()){
+            result.add(new ArrayList<>());
+        }
+
+        result.get(level).add(root.val);
+
+        dfs(root.left, level + 1);
+        dfs(root.right, level + 1);
+    }
 }
