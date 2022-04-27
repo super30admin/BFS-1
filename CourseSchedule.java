@@ -3,6 +3,7 @@ import java.util.*;
 public class CourseSchedule {
 
     // TC: O(V + E) => V - number of vertices    E - number of edges
+        // For each vertex, we are iterating over the list of edges associated with it only. So, not V * E
     // SC: O(V + E)
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // prerequisites.length = 0 meaning no prerequisites. So, can finish the semester
