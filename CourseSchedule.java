@@ -60,3 +60,48 @@ class Solution {
 
     }
 }
+
+//DFS
+
+class Solution {
+    HashMap<Integer, List<Integer>> map;
+    boolean [] path;
+    boolean [] visited;
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        map = new HashMap<>();
+        path = new boolean [numCourses];
+        visited = new boolean [numCourses];
+        for(int [] edge : prerequisites){
+            if(!map.containsKey(edge[1])){
+                map.put(edge[1], new ArrayList<>());
+            }
+            map.get(edge[1]).add(edge[0]);
+        }
+        for(int i = 0; i < numCourses; i++){
+            if(visited[i] == false && dfs(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean dfs(int courses){
+        if(path[courses] == true){
+            return true;
+        }
+        if(visited[courses] == true){
+            return false;
+        }
+        path[courses] = true;
+        visited[courses] = true;
+        List<Integer> edges = map.get(courses);
+        if(edges != null){
+            for(int a : edges){
+                if(dfs(a) == true){
+                    return true;
+                }
+            }
+        }
+        path[courses] = false;
+        return false;
+    }
+}
