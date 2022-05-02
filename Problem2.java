@@ -6,8 +6,8 @@ import java.util.List;
 // SC : O (v + E )
 // where V is vertex and E is edges
 public class Problem2 {
-    boolean path[];
-    boolean visited[];
+    boolean[] path;
+    boolean[] visited;
     HashMap<Integer, List<Integer>> map;
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
@@ -42,7 +42,7 @@ public class Problem2 {
         List<Integer> edges = map.get(course);
         if (edges != null) {
             for (int edge : edges) {
-                if (hasCycle(edge) == true) return true;
+                if (hasCycle(edge)) return true;
             }
         }
         path[course] = false;
