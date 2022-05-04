@@ -6,3 +6,7 @@ Binary Tree Level Order Traversal (https://leetcode.com/problems/binary-tree-lev
 Course Schedule (https://leetcode.com/problems/course-schedule/)
 
 
+
+//problem1. java has O(n) time complexity and O(n) space compelexity
+
+//problem2. java has O(V+E) time complexity and O(Vertics) space compelexity
