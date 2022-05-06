@@ -1,0 +1,45 @@
+//https://leetcode.com/problems/binary-tree-level-order-traversal/
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :
+
+
+// Your code here along with comments explaining your approach
+//BFS using Queue
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        
+        if(root == null) return new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+             List<Integer> l1 = new ArrayList<>();
+            for(int i =0 ;i<size;i++)
+            {
+                TreeNode curr = q.poll();
+               
+                l1.add(curr.val);
+                
+                if(curr.left !=null)
+                {
+                    q.add(curr.left);
+                }
+                
+                if(curr.right != null)
+                {
+                    q.add(curr.right);
+                }                    
+                    
+            }
+            result.add(l1);
+        }
+        
+        return result; 
+    }
+}
