@@ -1,0 +1,76 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites)
+    {
+        // Step 1. create Indegrees array to store dependencies i.e number of prerequisities  for each course
+        
+        int [] indegrees = new int[numCourses];
+        
+        // Step2. create a Hashmap to have adjancecy list
+        
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        
+        // Fill in the values in HashMap
+        
+        for(int[] edge: prerequisites)
+        {
+            //Node at edge[0] position  dependent of prereq so increase its dependency by 1
+            indegrees[edge[0]]++;
+            
+            if(!map.containsKey(edge[1]))
+            {
+                map.put(edge[1], new ArrayList<>());
+            }
+           map.get(edge[1]).add(edge[0]);
+            
+        }
+        
+        //Create a queue for subjects with 0 dependency
+        
+        Queue<Integer> subject = new LinkedList<>();
+        for(int i = 0;i<indegrees.length;i++)
+        {
+            if (indegrees[i] == 0)
+            {
+                subject.add(i);
+            }
+        }
+        
+        if(subject.size() == 0)
+        {
+            return false;
+        }
+        
+        while(!subject.isEmpty())
+        {
+            int curr = subject.poll();
+            
+            List<Integer> dependents = map.get(curr);
+            
+            if(dependents != null)
+            {
+                 for(int dep: dependents)
+            {
+                  indegrees[dep]--;
+                
+                     if(indegrees[dep] == 0)
+                    {
+                        subject.add(dep);
+                    }
+            }
+                
+            }
+            
+           
+        }
+        
+          for(int i=0; i< indegrees.length;i++)
+            {
+                if(indegrees[i] > 0)
+                {
+                    return false;
+                }
+            }
+        return true;
+        
+    }
+}
