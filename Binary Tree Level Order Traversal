@@ -1,0 +1,43 @@
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) 
+    {
+        List<List<Integer>> result = new ArrayList<>();
+        
+        // Edge case
+        if(root == null)
+        {
+            return result;
+        }
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty())
+        {
+            List<Integer> temp = new LinkedList<>();
+            int size = q.size();
+            for(int i=0 ;i<size;i++)
+            {
+                TreeNode curr = q.poll();
+                // for current level add the value to temp list
+                
+                temp.add(curr.val);
+                
+                if(curr.left != null)
+                {
+                    q.add(curr.left);
+                }
+                if(curr.right != null)
+                {
+                    q.add(curr.right);
+                }
+            }
+           result.add(temp);
+        }
+        
+        return result;
+    }
+}
+
+// Time complexity will be O(n) as we will be traversing each node once
+// Space complexity will be O(n/2) as it would be the number of leaf node or width of a tree.
