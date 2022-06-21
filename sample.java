@@ -96,3 +96,69 @@ class Solution {
         
     }
 }
+
+//****COURSE SCHEDULE****
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        //null case
+        if(prerequisites.length==0 ||prerequisites==null) return true;
+        
+        //make an indegree array of dependent elements
+        int[] indegree = new int[numCourses];
+        //Make a hashmap of independent to the dependent elements
+        HashMap<Integer,List<Integer>> map=new HashMap<>();
+        
+        //Traversing through the prerequisites and adding them to indegree and         //hashmap
+        for(int[] edge: prerequisites)
+        {
+            indegree[edge[0]]++;
+            if(!map.containsKey(edge[1]))
+            {
+                map.put(edge[1], new ArrayList<>());
+            }
+            map.get(edge[1]).add(edge[0]);
+        }
+        
+        //For bfs declaring a queue
+        Queue<Integer> q=new LinkedList<>();
+        //count variable for returning result
+        int count=0;
+        
+        //Adding first of all the independent node to the queue;
+        for(int i=0;i<numCourses;i++)
+        {
+            if(indegree[i]==0)
+            {
+                q.add(i);
+                count++;
+                
+            }
+        }
+    
+        //Now traversing the queue 
+        while(!q.isEmpty())
+        {
+            int curr=q.poll();
+            //Now getting all the nodes that were dependent on the current
+            List<Integer> li=map.get(curr);
+            if(li!=null)
+            {
+                for(int i:li)
+                {
+                    indegree[i]--;
+                    if(indegree[i]==0)
+                    {
+                        q.add(i);
+                        count++;
+                        if(count==numCourses) return true;
+                    }
+                }
+            }
+            
+        }
+        return false;
+        
+        
+        
+    }
+}
