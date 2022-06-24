@@ -1,54 +1,46 @@
-#Time Complexity: O(E + V) where V is the number of courses, and E is the number of dependencies.
-#Space: O(E + V)
-
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
+#time complexity- O(n) where n is the number of nodes
+#space complexity - O(n)
+from collections import deque
+class Solution:
+    def levelOrder(self, root):
         """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
+        :type root: TreeNode
+        :rtype: List[List[int]]
         """
-        from collections import defaultdict
-        courseDict = defaultdict(list)
-
-        for relation in prerequisites:
-            nextCourse, prevCourse = relation[0], relation[1]
-            courseDict[prevCourse].append(nextCourse)
-
-        checked = [False] * numCourses
-        path = [False] * numCourses
-
-        for currCourse in range(numCourses):
-            if self.isCyclic(currCourse, courseDict, checked, path):
-                return False
-        return True
-
-
-    def isCyclic(self, currCourse, courseDict, checked, path):
-        """   """
-        # 1). bottom-cases
-        if checked[currCourse]:
-            # this node has been checked, no cycle would be formed with this node.
-            return False
-        if path[currCourse]:
-            # came across a marked node in the path, cyclic !
-            return True
-
-        # 2). postorder DFS on the children nodes
-        # mark the node in the path
-        path[currCourse] = True
-
-        ret = False
-        # postorder DFS, to visit all its children first.
-        for child in courseDict[currCourse]:
-            ret = self.isCyclic(child, courseDict, checked, path)
-            if ret: break
-
-        # 3). after the visits of children, we come back to process the node itself
-        # remove the node from the path
-        path[currCourse] = False
-
-        # Now that we've visited the nodes in the downstream,
-        #   we complete the check of this node.
-        checked[currCourse] = True
-        return ret
+        #iterative approach while maintaining the size for each level of tree. 
+        #initiate queue with root value
+        #queue will be maintained with the elements of each level
+        #while queue is not empty
+        #add empty list to levels
+        #append values from the queue to levels based on the level and index
+        #pop all elements
+        #append elements to the queue 
+        #increment the level
+        
+        levels = []
+        if not root:
+            return levels
+        
+        level = 0
+        queue = deque([root, ])
+        while queue:
+            #append empty list to levels->level[0] will have values of level 0 of the tree. 
+            levels.append([])
+            
+            #find the number of elements that will be there in a level
+            level_length = len(queue)
+            
+            for i in range(level_length):
+                
+                
+                node = queue.popleft()
+                levels[level].append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+            level += 1
+        return levels
+            
+            
