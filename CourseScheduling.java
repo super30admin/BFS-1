@@ -1,13 +1,5 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-     
-        /*
-         
-         *
-         *
-        /
-        
-
         
         /*
          * We need to identify the node where to start BFS
