@@ -1,0 +1,73 @@
+//Time Complexity : O(n)
+//Space Complexity : O(h) where h is height of the tree
+// Did this code successfully run on Leetcode : Yes
+
+
+class Solution 
+{
+    public boolean canFinish(int numCourses, int[][] prerequisites) 
+    {
+        int[] inDegree = new int[numCourses];
+        int completedCourses = 0;
+        HashMap<Integer, ArrayList<Integer>> hmap = new HashMap<Integer, ArrayList<Integer>>();
+        for(int[] req : prerequisites)
+        {
+            if(!hmap.containsKey(req[1]))
+            {
+                hmap.put(req[1],new ArrayList<Integer>());
+            }
+            
+            hmap.get(req[1]).add(req[0]);
+            int in = req[0];
+            inDegree[in]++;
+        }
+        
+        Queue<Integer> q = new LinkedList<Integer>();
+        
+        for(int i=0;i<inDegree.length;i++)
+        {
+            if(inDegree[i]==0)
+            {
+                q.add(i);
+                completedCourses++;
+            }
+        }
+        
+        
+        while(!q.isEmpty())
+        {
+            int s = q.poll();
+            System.out.println(s);
+            ArrayList<Integer> arr = hmap.get(s);
+            if(arr==null)
+            {
+                continue;  
+            }
+            for(int i =0;i<arr.size();i++)
+            {
+                int f = arr.get(i);
+                inDegree[f]--;
+                if(inDegree[f]==0)
+                {
+                    q.add(f);
+                    completedCourses++;
+                }
+            }
+            
+        }
+        // for(int i=0;i<inDegree.length;i++)
+        // {
+        //     //System.out.println(inDegree[i]);
+        //     if(inDegree[i]!=0)
+        //     {
+        //         return false;
+        //     }
+        // }
+        if(completedCourses == inDegree.length)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+}
