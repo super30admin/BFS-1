@@ -3,71 +3,142 @@
 // Did this code successfully run on Leetcode : Yes
 
 
+//DFS Cycle detection solution
 class Solution 
 {
+    HashMap<Integer, ArrayList<Integer>> hmap;
+    boolean visited[];
+    boolean path[];
     public boolean canFinish(int numCourses, int[][] prerequisites) 
     {
-        int[] inDegree = new int[numCourses];
-        int completedCourses = 0;
-        HashMap<Integer, ArrayList<Integer>> hmap = new HashMap<Integer, ArrayList<Integer>>();
+        hmap = new HashMap<Integer, ArrayList<Integer>>();
+        visited = new boolean[numCourses];
+        path = new boolean[numCourses];
+        
         for(int[] req : prerequisites)
         {
             if(!hmap.containsKey(req[1]))
             {
                 hmap.put(req[1],new ArrayList<Integer>());
             }
-            
             hmap.get(req[1]).add(req[0]);
-            int in = req[0];
-            inDegree[in]++;
-        }
-        
-        Queue<Integer> q = new LinkedList<Integer>();
-        
-        for(int i=0;i<inDegree.length;i++)
-        {
-            if(inDegree[i]==0)
-            {
-                q.add(i);
-                completedCourses++;
-            }
         }
         
         
-        while(!q.isEmpty())
+        //DFS
+        for(int i=0;i<numCourses;i++)
         {
-            int s = q.poll();
-            System.out.println(s);
-            ArrayList<Integer> arr = hmap.get(s);
-            if(arr==null)
+            if(visited[i]==false && hasCycle(i))
             {
-                continue;  
-            }
-            for(int i =0;i<arr.size();i++)
-            {
-                int f = arr.get(i);
-                inDegree[f]--;
-                if(inDegree[f]==0)
-                {
-                    q.add(f);
-                    completedCourses++;
-                }
+                return false;
             }
             
         }
-        // for(int i=0;i<inDegree.length;i++)
-        // {
-        //     //System.out.println(inDegree[i]);
-        //     if(inDegree[i]!=0)
-        //     {
-        //         return false;
-        //     }
-        // }
-        if(completedCourses == inDegree.length)
+        
+        return true;
+    }
+    
+    public boolean hasCycle(int u)
+    {
+        if(path[u] == true)
         {
             return true;
         }
         
+        if(visited[u] == true)
+        {
+            return false;
+        }
+        
+        
+        visited[u] = true;
+        path[u] = true;
+        ArrayList<Integer> edges = hmap.get(u);
+        if(edges!=null)
+        {
+            for(int edge:edges)
+            {
+                if(hasCycle(edge)) 
+                {
+                    return true;
+                }
+            }
+        }
+        
+        
+        path[u] = false;
         return false;
     }
+    
 }
+
+
+//
+// class Solution 
+// {
+//     public boolean canFinish(int numCourses, int[][] prerequisites) 
+//     {
+//         int[] inDegree = new int[numCourses];
+//         int completedCourses = 0;
+//         HashMap<Integer, ArrayList<Integer>> hmap = new HashMap<Integer, ArrayList<Integer>>();
+//         for(int[] req : prerequisites)
+//         {
+//             if(!hmap.containsKey(req[1]))
+//             {
+//                 hmap.put(req[1],new ArrayList<Integer>());
+//             }
+            
+//             hmap.get(req[1]).add(req[0]);
+//             int in = req[0];
+//             inDegree[in]++;
+//         }
+        
+//         Queue<Integer> q = new LinkedList<Integer>();
+        
+//         for(int i=0;i<inDegree.length;i++)
+//         {
+//             if(inDegree[i]==0)
+//             {
+//                 q.add(i);
+//                 completedCourses++;
+//             }
+//         }
+        
+        
+//         while(!q.isEmpty())
+//         {
+//             int s = q.poll();
+//             System.out.println(s);
+//             ArrayList<Integer> arr = hmap.get(s);
+//             if(arr==null)
+//             {
+//                 continue;  
+//             }
+//             for(int i =0;i<arr.size();i++)
+//             {
+//                 int f = arr.get(i);
+//                 inDegree[f]--;
+//                 if(inDegree[f]==0)
+//                 {
+//                     q.add(f);
+//                     completedCourses++;
+//                 }
+//             }
+            
+//         }
+//         // for(int i=0;i<inDegree.length;i++)
+//         // {
+//         //     //System.out.println(inDegree[i]);
+//         //     if(inDegree[i]!=0)
+//         //     {
+//         //         return false;
+//         //     }
+//         // }
+//         if(completedCourses == inDegree.length)
+//         {
+//             return true;
+//         }
+        
+//         return false;
+//     }
+// }
