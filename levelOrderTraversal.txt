@@ -1,0 +1,30 @@
+//Time Complexity : O(n)
+//Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) 
+    {
+        
+        List<List<Integer>> arr = new ArrayList<List<Integer>>();
+
+        func(arr, root, 0);
+        return arr;
+        
+    }
+    
+    public static void func(List<List<Integer>> res, TreeNode root, int h) {
+        if (root == null) 
+        {
+            return;
+        }
+        if (h == res.size()) 
+        {
+            res.add(new ArrayList<Integer>());
+        }
+        res.get(h).add(root.val);
+        func(res, root.left, h+1);
+        func(res, root.right, h+1);
+    }
+}
