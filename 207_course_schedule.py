@@ -89,6 +89,8 @@
                                 For Adjecency list  : Number of courses
                                 For Queue           : Number of courses
                                 We store values based on number of edges per vertex.
+
+Note: Time and space complexities are same for both BFS and DFS based approaches used.
 '''
 
 from queue import Queue
@@ -109,7 +111,11 @@ def get_input():
     return numCourses, prerequisites
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    # Used in DFS based solution
+    courses_map = {}
+    path = []
+    visisted = []
+    def canFinish_BFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         if numCourses == 0:
             return True
 
@@ -146,9 +152,61 @@ class Solution:
         # Cyclic dependencies don't exist if all dependencies in indegrees are cleared out.
         return all(val == 0 for val in indegrees)
 
+    def has_cycle(self, vertex: int):
+        # base case
+        if self.path[vertex] == True:
+            # visiting a node that we already visited on the path.
+            # that means, we have a cycle.
+            return True
+
+        # Also, there is no point in carrying out a DFS on a visited node and not found a cycle.
+        if self.visited[vertex] == True:
+            return False
+
+        # logic or action
+        # Mark the vertex in consideration to be on the path being taken
+        self.path[vertex]    = True
+        # Mark the vertext as visited
+        self.visited[vertex] = True
+        # Now get all edges going out from the vertex in consideration using adjecency list.
+        edges = self.courses_map[vertex]
+
+        # Now give a recursive call
+        for edge in edges:
+            if self.has_cycle(edge):
+                return True
+
+        # backtrack
+        self.path[vertex] = False
+        return False
+
+    def canFinish_DFS(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if numCourses == 0:
+            return True
+
+        # step 1: Create path and visited arrays
+        self.path    = [False] * numCourses
+        self.visited = [False] * numCourses
+
+        for num in range(numCourses):
+            self.courses_map[num] = []
+
+        # Fill in adjecency list and indegrees array
+        for pair in prerequisites:
+            if not pair[1] in self.courses_map:
+                self.courses_map[pair[1]] = []
+            self.courses_map[pair[1]].append(pair[0])
+
+
+        for i in range(numCourses):
+            if self.visited[i] == False and self.has_cycle(i):
+                return False
+        return True
+
 # Driver code
 solution = Solution()
 numCourses, prerequisites = get_input()
 print(f"Input: Total number of courses to be completed: {numCourses}")
 print(f"Input: Pre-requisites(Course number , Pre-requisite course number): {prerequisites}")
-print(f"Is it possible to complete all courses?: {solution.canFinish(numCourses, prerequisites)}")
+print(f"Approach 1: Using BFS: Is it possible to complete all courses?: {solution.canFinish_BFS(numCourses, prerequisites)}")
+print(f"Approach 2: Using DFS: Is it possible to complete all courses?: {solution.canFinish_DFS(numCourses, prerequisites)}")

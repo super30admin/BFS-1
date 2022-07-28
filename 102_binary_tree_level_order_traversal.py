@@ -164,8 +164,6 @@ class Solution:
         self.dfs(root, level)
         return self.result
 
-
-# Driver code
 # Driver code
 solution = Solution()
 l, root = get_input()
