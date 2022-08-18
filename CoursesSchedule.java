@@ -1,3 +1,7 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : yes
+
 class Solution {
    public boolean canFinish(int numCourses, int[][] prerequisites) {
        int [] degrees = new int [numCourses];
