@@ -1,3 +1,6 @@
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : yes
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
