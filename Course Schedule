@@ -1,0 +1,26 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        map = [set() for i in range(numCourses)]
+        rMap = [set() for i in range(numCourses)] 
+        for prer in prerequisites:
+            map[prer[0]].add(prer[1])
+            rMap[prer[1]].add(prer[0])
+        queue = deque()
+        for i in range(numCourses):
+            if len(map[i]) == 0:
+                queue.append(i)
+        while queue:
+            current = queue.popleft()
+            for j in rMap[current]:
+                if current in map[j]:
+                    map[j].remove(current)
+                    if len(map[j]) == 0:
+                        queue.append(j)
+        for i in range(numCourses):
+            if not len(map[i]) == 0:
+                return False
+        return True
+    
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+# Successfully implemented on Leetcode
