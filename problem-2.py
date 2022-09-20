@@ -1,3 +1,5 @@
+#tc:O(V+E)
+#sc: O(V+E)
 class Solution:
     def canFinish(self, numCourses: int, prerequisites) -> bool:
         if len(prerequisites) == 0 or numCourses == 1: 
