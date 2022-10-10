@@ -1,0 +1,33 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        d=dict()
+        ls=[0]*numCourses
+        for i in prerequisites:
+            a=i[0]
+            b=i[1]
+            ls[a]=ls[a]+1
+            if d.get(b) is None:
+                l3=[]
+                l3.append(a)
+                d[b]=l3
+            else:
+                d[b].append(a)
+        q=[]
+        cs=0
+        for i in range(0,len(ls)):
+            if(ls[i]==0):
+                cs+=1
+                q.append(i)
+        while(len(q)>0):
+            c=q.pop(0)
+            l1=d.get(c)
+            if(l1):
+                for i in l1:
+                    ls[i]=ls[i]-1
+                    if(ls[i]==0):
+                        cs+=1
+                        q.append(i)
+        if(cs==numCourses):
+            return True
+        else:
+            return False
