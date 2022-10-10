@@ -55,6 +55,6 @@ var canFinish = function (numCourses, prerequisites) {
             })
         }
     }
-    // Ig total courses taken i.e added in the queue are same as numCourses, return true
+    // In total courses taken i.e added in the queue are same as numCourses, return true
     return totalCount === numCourses;
 };
