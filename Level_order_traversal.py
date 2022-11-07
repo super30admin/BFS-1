@@ -1,3 +1,7 @@
+# TC: O(n)
+# SC: O(h)
+# Does this code run on Leetcode: Yes
+# Did you find any difficulties while coding this: No
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
