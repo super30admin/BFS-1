@@ -1,5 +1,5 @@
-//Time complexity: O(n)
-//Space complexity: O(n)
+//Time complexity: O(V + E)
+//Space complexity: O(V + E)
 
 public class CourseScheduleSolution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
