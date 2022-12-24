@@ -59,3 +59,58 @@ class Solution {
         return result;
     }
 }
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
+ * }
+ */
+// Time Complexity : O(H)
+// Space Complexity : (n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+// Your code here along with comments explaining your approach in three
+// sentences only
+/*
+ * DFS approach
+ * We maintain level variable for every level and while doing the DFS approach.,
+ * if the size of the result list if equal to the current level that means that
+ * level is not yet included in the list so create new ArrayList else just get
+ * the level and add the root value to that level
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        dfs(root, 0, result);
+
+        return result;
+    }
+
+    private void dfs(TreeNode root, int level, List<List<Integer>> result) {
+        // base
+        if (root == null)
+            return;
+
+        // logic
+        if (result.size() == level) {
+            result.add(new ArrayList<>());
+        }
+        result.get(level).add(root.val);
+        dfs(root.left, level + 1, result);
+
+        dfs(root.right, level + 1, result);
+
+    }
+}
