@@ -1,0 +1,67 @@
+// Time Complexity : o(v+e)
+// Space Complexity : o(v+e)
+// Did this code successfully run on Leetcode : yes
+// Any problem you faced while coding this : no
+
+
+// Your code here along with comments explaining your approach
+/*
+* Create adj list and indegree array
+* Add nodes with indegree = 0 into the queue as they done have any prerequisites
+* pop the element from queue and update the indegree of its neighbors
+* if any of the neighbor's indegree becomes 0 add it into the queue.
+* after each pop update the res
+* if res == numcourses then all the courses could be completed
+* */
+
+
+class Solution {
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] indegree = new int[numCourses];
+        List<List<Integer>> adj = createAdjList(numCourses, prerequisites, indegree);
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < numCourses; i++){
+            if(indegree[i] == 0){
+                q.add(i);
+            }
+        }
+        int res = 0;
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                int c = q.poll();
+                List<Integer> neigh = adj.get(c);
+                for(int nei : neigh){
+                    indegree[nei]--;
+                    if(indegree[nei] == 0){
+                        q.add(nei);
+                    }
+                }
+
+                res++;
+            }
+        }
+        if(res != numCourses)
+            return false;
+        return true;
+    }
+
+    List<List<Integer>> createAdjList(int numCourses, int[][] pre, int[] indegree){
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i = 0; i < numCourses; i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for(int i = 0; i < pre.length; i++){
+            int dep = pre[i][0];
+            int indep = pre[i][1];
+            indegree[dep]++;
+            adj.get(indep).add(dep);
+        }
+
+        return adj;
+    }
+
+}
