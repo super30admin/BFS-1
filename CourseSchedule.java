@@ -1,6 +1,6 @@
 //https://leetcode.com/problems/course-schedule/
 //TC: V+E 
-//SC: E
+//SC: V+E
 V- vertices ,E - edges
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
