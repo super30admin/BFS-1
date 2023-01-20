@@ -3,40 +3,34 @@ package main
 // will do a DFS solution on this now
 // Time
 // will do a DFS solution on this now
-// Time : O(n)
-// Space : O(h) - for recursive stack its height of the tree, we also have aux space that we have created to store the values temporarily and that is 100 (as its the constraint of the tree)
-func rightSideView(root *TreeNode) []int {
+// Time : O(n) : n are the number of nodes in the tree
+// Space : O(w) - w is width of the tree
+func levelOrder(root *TreeNode) [][]int {
 	if root == nil {
-		return []int{}
+		return nil
 	}
-	var dfs func(root *TreeNode, height int) int
-	rightSide := make([]int, 100) // extra space, but required as trying DFS
-	rightSide[0] = root.Val       // add the root to right side view array
-	dfs = func(root *TreeNode, height int) int {
-		// base
-		if root == nil {
-			return 0
-		}
-		// logic - doing pre order here
-		if root.Left != nil {
-			rightSide[height] = root.Left.Val
-		}
-		if root.Right != nil {
-			rightSide[height] = root.Right.Val
-		}
+	q := []*TreeNode{root}
+	result := [][]int{}
 
-		// recurse
-		lheight := dfs(root.Left, height+1)
-		rheight := dfs(root.Right, height+1)
-		return max(lheight, rheight) + 1
+	for len(q) != 0 {
+		level := []int{}
+		qSize := len(q)
+		for qSize != 0 {
+			dq := q[0]
+			q = q[1:]
+			level = append(level, root.Val)
+			if dq.Left != nil {
+				q = append(q, root.Left)
+			}
+			if dq.Right != nil {
+				q = append(q, root.Left)
+			}
+			qSize--
+			if qSize == 0 {
+				result = append(result, level)
+			}
+		}
 	}
-	height := dfs(root, 1)     // need height as I need to remove the )'s that were init'd when default array was created
-	return rightSide[0:height] // this is extra time. best could have been where we slicing was not required.
-}
+	return result
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
