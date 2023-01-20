@@ -1,0 +1,57 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] degrees = new int[numCourses];
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        
+        Queue<Integer> q = new LinkedList<>();
+        
+        // a is dependent on b [1,0] - 
+        //Create adjacency list and degrees array
+        for(int[] edge : prerequisites) { // O(E)
+            int dependent = edge[0];
+            int independent = edge[1];
+            
+            if(map.containsKey(independent)) {
+                map.get(independent).add(dependent);
+            } else {
+                map.put(independent, new ArrayList<>(Arrays.asList(dependent)));
+            }
+            degrees[dependent] = degrees[dependent] + 1;
+        }
+        
+        for(int i = 0; i < degrees.length; i++) { // O(V)
+            //Get all degrees with zero. 
+            if(degrees[i] == 0) {
+                q.add(i);
+            }
+        }
+        
+        //Cannot start from anywhere. 
+        if(q.isEmpty()) return false;
+        
+        while(!q.isEmpty()) { // O (V+E)
+            int independentChild = q.poll();
+            //Get dependent child and reduce there degree by 1,
+            List<Integer> childs = map.get(independentChild);
+            
+            if(childs != null) {
+                 for(int child : childs) {
+                    degrees[child]--;
+                    if(degrees[child] == 0) {
+                        q.add(child);
+                    }
+                }
+            }
+           
+        }
+        
+        //If at last degrees!=0 anywhere, course couldn't be completed. 
+        for(int i = 0; i < numCourses; i++) {
+            if(degrees[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+        
+    }
+}
