@@ -1,0 +1,71 @@
+// Time Complexity : O(N)
+// Space Complexity : O(N / 2)  --> O(N)
+// Did this code successfully run in leetcode : Yes
+// Any problems faced : No
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+// BFS
+// class Solution {
+// public:
+//     vector<vector<int>> levelOrder(TreeNode* root) {
+//         vector<vector<int>> res;
+//         queue<TreeNode*> q;
+//         if(root == NULL) return res;
+//         q.push(root);
+//         while(!q.empty()) {
+//             int size = q.size();  // to maintain levels
+//             vector<int> temp; // should be empty for each level
+//             for(int i = 0; i < size; i++) {
+//                 TreeNode* curr = q.front();
+//                 q.pop();
+//                 temp.push_back(curr -> val); // all the elements in a level should be added to temp vector
+//                 if(curr -> left) q.push(curr -> left);
+//                 if(curr -> right) q.push(curr -> right);
+//             }
+//             res.push_back(temp); // after each level, temp vector should be added to the result
+//         }
+//         return res;
+//     }
+// };
+
+
+// DFS
+
+class Solution {
+public:
+
+    vector<vector<int>> res;
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if(root == NULL) return res;
+        dfs(root, 0);
+        return res;
+    }
+
+    void dfs(TreeNode* root, int depth) {
+        // base
+        if(root == NULL) return;
+        // logic
+        if(depth == res.size()) {
+            vector<int> v;
+            v.push_back(root -> val);
+            res.push_back(v);
+        } else {
+            res[depth].push_back(root -> val);
+        }
+
+        dfs(root -> left, depth + 1);
+        dfs(root -> right, depth + 1);
+
+    }
+};

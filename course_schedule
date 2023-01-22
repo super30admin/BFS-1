@@ -1,0 +1,54 @@
+// Time Complexity : O(V + E)
+// E is the sum of all the dependencies
+// V is the number of courses
+// Space Complexity : O(V + E)
+// Did this code successfully run in leetcode : Yes
+// Any problems faced : No
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        // bi is independent and ai is dependent
+        // v - indegrees, q - contains all the no. of independent courses
+        
+        // if(prerequisites.size() == 0) return true;
+        
+        map<int, vector<int>> mp;
+        vector<int> v(numCourses, 0);
+        
+        for(vector<int> edge : prerequisites) {
+            v[edge[0]]++;
+            mp[edge[1]].push_back(edge[0]);
+        }
+        
+        int count = 0;
+        queue<int> q;
+        
+        for(int i = 0; i < v.size(); i++) {
+            if(v[i] == 0) {
+                q.push(i);
+                count++;
+            }
+        }
+        
+        if(q.empty()) return false;
+        
+        while(!q.empty()) {
+            int curr = q.front();
+            q.pop();
+            vector<int> ch = mp[curr];
+            if(ch.size() > 0) {
+                for(auto c : ch) {
+                    v[c]--;
+                    if(v[c] == 0) {
+                        q.push(c);
+                        count++;
+                    }
+                }
+            }
+        }
+        
+        if(count == numCourses) return true;
+        return false;
+    }
+};
