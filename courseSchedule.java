@@ -1,3 +1,5 @@
+//time complexity : O(m*n)
+//space complexity : O(m*n)
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int [] arr = new int[numCourses];
