@@ -3,7 +3,7 @@
  //successfully executed on leetCode
 
 //using dfs
-class Solution {
+class BinaryTreeLevelOrderTraversalDFS {
         List<List<Integer>> result;
     public List<List<Integer>> levelOrder(TreeNode root) {
     result = new ArrayList<>();
