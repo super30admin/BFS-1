@@ -1,0 +1,54 @@
+//time complexity: O(V+E)
+//space complexity: O(V+E)
+//successfully executed on leetcode
+
+class CourseSchedule {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        HashMap<Integer,List<Integer>> map = new HashMap();
+        int[] inDegree = new int[numCourses];
+        for(int[] edges: prerequisites){
+            int in =edges[0];
+            int out =edges[1];
+            inDegree[in]++; // indegree array, which tells particular element is dependent on how many preReq
+            //map where keys are independent element and values are their children (elements depend on the independent element)
+            if(!map.containsKey(out)){
+                map.put(out, new ArrayList<>());
+            }
+            map.get(out).add(in);
+        }
+        Queue<Integer> q= new LinkedList<>();
+        int count=0;
+        for(int i=0; i<numCourses;i++){
+            // if there is any element with indegree 0, add to the Queue
+            if(inDegree[i]==0){
+            q.add(i);
+            count++;
+            }
+        }
+        while(!q.isEmpty()){
+            int preReq= q.poll();
+            //pop the first element from the queue and check the children which are dependent on the preReq
+            List<Integer> children = map.get(preReq);
+            if(children!=null){
+            for(int child : children){
+                inDegree[child]--;
+                if(inDegree[child]==0){
+                    q.add(child);
+                    count++;
+                     if(count==numCourses){
+            return true;
+        }
+                }
+            }
+            }
+        }
+        //handling edge case, when there are only independent element
+        if(count==numCourses){
+            return true;
+        }
+        else{
+            return false;
+        }
+           
+    }
+}
