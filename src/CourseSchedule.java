@@ -19,39 +19,39 @@ public class CourseSchedule {
             int source = prereq[1];
 
             if(!adjList.containsKey(source)) {
-                adjList.put(source, new ArrayList<>());
+                adjList.put(source, new ArrayList<>());                          // making adjacency list
             }
 
-            adjList.get(source).add(dependent);
+            adjList.get(source).add(dependent);                                  // updating adjacency list
 
-            indegree[dependent]++;
+            indegree[dependent]++;                                               // updating indegrees
 
         }
 
-        Queue<Integer> q = new LinkedList<>();
+        Queue<Integer> q = new LinkedList<>();                                   // queue maintaining independent nodes
 
         for(int i=0; i<numCourses; i++) {
             if(indegree[i] == 0) {
-                q.add(i);
+                q.add(i);                                                        // adding independent nodes in queue
             }
         }
 
-        int completedCourses = 0;
+        int completedCourses = 0;                                                
         while(!q.isEmpty()) {
-            int course = q.remove();
-            completedCourses++;
+            int course = q.remove();                                             // getting independent course one by one
+            completedCourses++;                                                  // updating completed courses
 
-            List<Integer> dependentCourses = adjList.get(course);
+            List<Integer> dependentCourses = adjList.get(course);                // getting adjacency list of independent node
 
             if(dependentCourses != null) {
-                for(int dependent : dependentCourses) {
-                    indegree[dependent]--;
-                    if(indegree[dependent] == 0) {
-                        q.add(dependent);
+                for(int dependent : dependentCourses) {                          // getting dependent courses of nodes out of adjacncy list one by one
+                    indegree[dependent]--;                                       // updating indegrees
+                    if(indegree[dependent] == 0) {                               // if node becomes independent
+                        q.add(dependent);                                        // add it to queue
                     }
                 }
             }
         }
-        return completedCourses == numCourses;
+        return completedCourses == numCourses;                                   // if completed courses is equal to total courses, return true; or else false
     }
 }
