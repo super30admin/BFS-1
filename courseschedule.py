@@ -1,5 +1,5 @@
-# // Time Complexity :O(N)
-# // Space Complexity :O(n)
+# // Time Complexity :O(n+m)
+# // Space Complexity :O(n+m)
 # // Did this code successfully run on Leetcode :Yes
 # // Any problem you faced while coding this :no
 class Solution:
