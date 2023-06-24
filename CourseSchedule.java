@@ -33,6 +33,7 @@ class CourseSchedule {
         while(!q.isEmpty()){
             int current = q.poll();
             count++;
+            if(count == numCourses) return true;
 
             if(map.containsKey(current)){
                 List<Integer> dependentNodes = map.get(current);
@@ -44,6 +45,6 @@ class CourseSchedule {
                 }
             }
         }
-        return count == numCourses;
+        return false;
     }
 }
