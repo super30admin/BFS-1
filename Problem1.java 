@@ -1,5 +1,5 @@
-//Time Complexity:
-//Space Complexity:
+//Time Complexity: O(n)
+//Space Complexity: O(n)
 //Ran in Leetcoode: yes
 
 //Vist all the child nodes at each level and add to the result whihc is a BFS
