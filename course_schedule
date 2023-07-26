@@ -1,0 +1,28 @@
+#Space: O(m+n): 
+#Time: O(m+n): 
+from collections import defaultdict,deque
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
+       
+        ajacency_list = defaultdict(list)
+        
+        dependency  = [0]*numCourses
+        
+        
+        for val in prerequisites:
+            ajacency_list[val[1]].append(val[0])
+            dependency[val[0]]+=1
+        
+       
+        queue = deque()
+        queue = deque(course for course,degree in enumerate(dependency) if not degree)
+        
+        
+        while(queue):
+            course = queue.popleft()
+            for other_course in ajacency_list[course]:
+                dependency[other_course]-=1
+                if not dependency[other_course]:
+                    queue.append(other_course)
+            
+        return not sum(dependency)
