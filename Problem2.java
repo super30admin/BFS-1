@@ -2,7 +2,8 @@
 //Space Complexity: O(V+E)
 //Ran in Leetcoode: yes
 
-//Vist all the child nodes at each level and add to the result whihc is a BFS
+//Manintain a hashmap with node and dependent nodes, indegree arry and queue each time the an element is polled the count of indree is decreased, 
+//in the all the indrees should be 0
 
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
