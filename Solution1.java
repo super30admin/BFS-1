@@ -1,4 +1,4 @@
-//Course-schedule
+//Course-schedule using BFS
 //TC-O(V+E)
 //SC-(V+E)
 
