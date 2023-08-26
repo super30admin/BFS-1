@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-
+//TC: O(n)
+//SC:O(n)
 public class BinaryTreeLevelOrderTraversal {
     List<List<Integer>> result;
     public List<List<Integer>> levelOrder(TreeNode root) {
