@@ -1,9 +1,9 @@
 # # Problem 2
 # Course Schedule (https://leetcode.com/problems/course-schedule/)
-# // Time Complexity :
-# // Space Complexity :
-# // Did this code successfully run on Leetcode :
-# // Any problem you faced while coding this :
+# // Time Complexity : O(v+e) --> all the edges
+# // Space Complexity : O(v+e)
+# // Did this code successfully run on Leetcode :Yes
+# // Any problem you faced while coding this :No
 
 
 # // Your code here along with comments explaining your approach
