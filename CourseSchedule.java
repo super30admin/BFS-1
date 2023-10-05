@@ -1,3 +1,7 @@
+/*
+Time Complexity  - O (V + E) V is number of courses, E is the number of prerequisites. 
+Space Complexity - O(V + E) 
+*/
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         
