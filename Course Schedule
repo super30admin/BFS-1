@@ -1,0 +1,28 @@
+#time complexity: O(V+E)
+#Space complexity: O(V+E)
+#did it run on leetcode: yes
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        adj = [[] for _ in range(numCourses)]
+        indegree = [0]*numCourses
+        ans = []
+        for pair in prerequisites:
+            course = pair[0]
+            prerequisite = pair[1]
+            adj[prerequisite].append(course)
+            indegree[course]+=1
+        
+        q = deque()
+        for i in range(numCourses):
+            if indegree[i]==0:
+                q.append(i)
+        
+        while q:
+            current = q.popleft()
+            ans.append(current)
+            for next_course in adj[current]:
+                indegree[next_course]-=1
+                if indegree[next_course]==0:
+                    q.append(next_course)
+
+        return len(ans)==numCourses        
