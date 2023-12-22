@@ -1,8 +1,10 @@
+//T.C O(n)
+//S.C O(n)
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
-
+//Using BFS approach to create list of nodes at each level.
 public class LevelOrderTraversal {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
