@@ -41,7 +41,33 @@ The number of nodes in the tree is in the range [0, 2000].
 #         self.left = left
 #         self.right = right
 class Solution:
+    """
+    Accepted
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    
+    Explanation: Level order traversal is essentially BFS. 
+        But in order to get the levels, we need to keep track of the size of the queue. AKA SIZE VARIABLE.
+        We update the size variable at the end of each level. Beginning at the head its 1, then 2, then 4, then 8, etc.
+        once a level is processed, the remaining nodes in the queue are the nodes in the next level. 
+        SO, we update the size variable to the length of the queue.
+        
+        Generate a list for each level and append it to the result list.
+    """
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        pass
+        if root is None: return []
+        lis = []
+        q = deque()
+        q.append(root)
+        while len(q) > 0:
+            size = len(q) # size of the current level
+            level = []
+            for i in range(size): # going over one level at a time
+                curr = q.popleft()
+                level.append(curr.val)
+                if curr.left: q.append(curr.left)
+                if curr.right: q.append(curr.right)
+            lis.append(level)
+        return lis
 
 LeetCode(PROBLEM, Solution).check()
