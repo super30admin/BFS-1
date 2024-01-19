@@ -41,8 +41,7 @@ All the pairs prerequisites[i] are unique.
 """
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        """
+    """
         Accepted
         Time Complexity: O(V+E) where V is the number of vertices and E is the number of edges. 
         Space Complexity: O(V+E)
@@ -79,6 +78,7 @@ class Solution:
             The order that we take the courses will be 0, 1, 2, 3.
 
         """
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         freqs = [0 for _ in range(numCourses)]
         deps = {_:[] for _ in range(numCourses)}
         for pre in prerequisites: # filling out freqs and deps
