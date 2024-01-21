@@ -1,3 +1,5 @@
+//tc: o(V+E) where v are vertices and E are edges
+//sc:o(v)
 class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         HashMap<Integer, List<Integer>> map = new HashMap<>();
