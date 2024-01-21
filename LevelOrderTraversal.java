@@ -38,7 +38,7 @@ class Solution {
         return result;
     }
 }
-//DFS 
+//DFS tc : o(n) sc: o(h)
 class Solution1 {
     List<List<Integer>> result = null;
     public List<List<Integer>> levelOrder(TreeNode root) {
