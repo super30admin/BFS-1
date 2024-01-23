@@ -1,3 +1,6 @@
+//TC: O(N)
+//SC: O(N)
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;

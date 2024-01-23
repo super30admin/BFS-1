@@ -1,3 +1,6 @@
+//TC: O(N)
+//SC: O(N)
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,6 @@ public class LevelOrder_dfs {
 
       dfs(root,0);
       return result;
-
     }
 
     private void dfs(TreeNode root, int height){

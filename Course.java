@@ -1,3 +1,6 @@
+//TC: O(V+E)
+//SC: O(V+E)
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
