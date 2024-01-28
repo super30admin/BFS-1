@@ -1,0 +1,42 @@
+# Course Schedule
+
+#TC: O(V + E)
+#SC: O(V + E)
+
+from collections import defaultdict
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # Build the graph
+        graph = defaultdict(list)
+        for course, prereq in prerequisites:
+            graph[course].append(prereq)
+
+        # Helper function for DFS
+        def dfs(course, visited):
+            # If the course is being visited in the current traversal, there is a cycle
+            if visited[course] == -1:
+                return False
+            # If we have already visited this course in a previous traversal, we don't need to visit again
+            if visited[course] == 1:
+                return True
+            
+            # Mark the course as being visited
+            visited[course] = -1
+
+            # Traverse the prerequisites of the course
+            for neighbor in graph[course]:
+                if not dfs(neighbor, visited):
+                    return False
+
+            # Mark the course as visited
+            visited[course] = 1
+            return True
+
+        # Perform DFS for each course
+        visited = [0] * numCourses
+        for course in range(numCourses):
+            if not dfs(course, visited):
+                return False
+
+        return True
