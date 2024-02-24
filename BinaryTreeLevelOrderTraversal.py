@@ -1,6 +1,6 @@
 '''
 TC: O(n) where n is number of nodes
-SC: O(1)
+SC: O(h) where h is the height of the tree
 '''
 # Definition for a binary tree node.
 from typing import List, Optional
