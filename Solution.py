@@ -27,8 +27,10 @@ class Solution(object):
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: bool
-        time: O(numCourses)
-        space: O(numCourses)
+        m = #edges
+        n = #courses
+        time: O(m + n)
+        space: O(m + n)
         """
         course2dependent = defaultdict(list)
         numPreq = [0] * numCourses        
