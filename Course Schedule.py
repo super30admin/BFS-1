@@ -1,3 +1,6 @@
+#TC: O(n)
+#SC: O(n)
+
 from collections import deque, defaultdict
 
 class Solution:
