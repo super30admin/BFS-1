@@ -1,0 +1,79 @@
+Time Complexity: O(n)
+Space Complexity: O(n/2) which equivalent ot O(n)--> The maximum space complexity would always be breadth of the tree.
+Ex: [3,9,10,7,6,8,5,1,2,4,11] For this input there won't be more than 8 elemnts in the queue. 
+These 8 elements are the leaf nodes(breadth of the tree). 
+Challenges: Identifying the important point to keep track of queue size so that output will have elements of each level.
+Approach: This is solved using Breadth First Search Traversal.
+1.Initially add root element to the queue.
+2.Maintain a size variable and traverse the queue until size of it. 
+3.While queue is not emepty traverse through the queue until the initial size of queueu is reached,
+  If the element is taken off, then add its left and right elements.
+4.When a elements is taken off add it to the arraylist. Note to maintain anew Arraylist for each level of traversal.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> values=new ArrayList<>();
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            List<Integer> list=new ArrayList<Integer>();
+            int size=queue.size();
+            for(int i=0;i<size;i++){
+                 TreeNode node=queue.poll();
+                 if(node!=null){
+                    if(node.left!=null) queue.add(node.left);
+                    if(node.right!=null) queue.add(node.right);
+                    list.add(node.val);
+                 }                 
+            }
+            if(list.size()>0)
+               values.add(list);
+        }
+        return values;
+    }
+}
+/*********************Using DFS approach to traverse the tree by levels******************************************/
+Time Complexity: O(n)
+Space Complexity: O(h): h is height of tree(This is stack space)
+Challenges: Getting idea to maintain level value that will be depth of the node. Depth maps to a position in arraylist.
+Approach: Maintain a level variable ,  when level variable matches the size of array this means there no arraylist created for that level. 
+When level is equal to array list(0==0) then create a new arraylist and add root value to it. In level order traversal root node is visited first followed by left and right.
+class Solution {
+    List<List<Integer>> output;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        output= new ArrayList<>();
+        dfs(root, 0);  
+        return output;      
+    }
+
+    public void dfs(TreeNode root, int level){
+        if(root==null) return;     
+// Add root node first		
+        if(level==output.size()){
+            List<Integer> newArray=new ArrayList<>();
+            newArray.add(root.val);
+            output.add(newArray);
+        }
+        else{
+            output.get(level).add(root.val);
+        }
+//Add left element
+        dfs(root.left, level+1);
+//Add right element
+        dfs(root.right, level+1);
+    }
+}

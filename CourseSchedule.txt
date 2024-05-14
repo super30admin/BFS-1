@@ -1,0 +1,60 @@
+Time Complexity: O(V+E)--> For each vertex we are not going over all the edges, we are going over only adjacent edges.
+Space Complexity: O(V)+O(E)--> O(V) for indegrees array and O(E) for map
+Challenge: Use Queue instead of an arraylist
+Approach: Followed Topological sorting technique.
+Step1: Find the incoming nodes for each node. Maintain indegree array for all incoming nodes.
+Step2: Create a map for all the independent nodes . Independent node is the key and dependent nodes are values.
+The reason we do it this way is to get the independent node using O(1) search time. 
+Lets say if the dependency map is created with key being the dependent node and value being the independent node.
+Then we have to traverse through all the values to find independent nodes.
+Step3: Find the independent nodes initially and write to the queue.
+Step4: Until the queue is empty keep traversing, and get the dependent nodes for the course. 
+Decrement the indegree count for that particular course, during decrement if there are independent nodes identified then add index to the queue.
+Step5: If the total count of courses equals the indegree length , then courses can be completed with the given course schedule.
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] indegree=new int[numCourses];
+        Map<Integer, List> map= new HashMap<>();
+        for(int[] pair : prerequisites){
+            indegree[pair[0]]++;
+            if(map.containsKey(pair[1])){
+                map.get(pair[1]).add(pair[0]);
+            }else {
+                List<Integer> newArr=new ArrayList<>();
+                newArr.add(pair[0]);
+                map.put(pair[1], newArr);
+            }
+        }
+        int count=0;
+        Queue<Integer> queue=new LinkedList<>();
+        for(int index=0;index<indegree.length;index++){
+            if(indegree[index]==0){
+                queue.add(index);
+                count++;
+            }                                        
+        }
+
+        if(queue.size()==0) return false;
+        if(queue.size()==indegree.length) return true;
+
+        while(!queue.isEmpty()){
+             int value=queue.poll();
+             List<Integer> list=map.get(value);
+             if(list!=null){
+                for(int each: list){
+                    indegree[each]--;
+                    if(indegree[each]==0){
+                        queue.add(each);
+                        count++;
+                    }
+                    System.out.println("Queue size "+ queue.size());
+                    System.out.println("Indegree lenth "+ indegree.length);
+                    System.out.println("count "+ count);
+                    if(count==indegree.length) return true;
+                }
+             }             
+        }
+
+        return false;
+    }
+}
