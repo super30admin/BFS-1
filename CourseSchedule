@@ -1,0 +1,88 @@
+BFS: T.c --> O(V+E), S.c --> O(v+E)
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+      Queue<Integer> q = new LinkedList<>();
+      int[] indegrees = new int[numCourses];
+      HashMap<Integer,List<Integer>> map = new HashMap<>();
+      for(int i = 0; i < prerequisites.length; i++){
+           indegrees[prerequisites[i][0]]++; 
+           if(!map.containsKey(prerequisites[i][1])){
+               map.put(prerequisites[i][1], new ArrayList<>());
+           }
+           map.get(prerequisites[i][1]).add(prerequisites[i][0]);
+       }
+      int count = 0; 
+      for(int i =0; i<indegrees.length; i++){
+        if(indegrees[i] == 0){
+            q.add(i);            
+            count++;
+        }
+      }
+
+      while(!q.isEmpty()){
+         int curr = q.poll();     
+         if(map.containsKey(curr)){
+            List<Integer> temp = map.get(curr);            
+            for(Integer t : temp){
+                indegrees[t]--;
+                if(indegrees[t] ==0){
+                   q.add(t);
+                   count++;
+                }                
+            }
+         }   
+      }
+      
+      if(count == numCourses){
+        return true;
+      }
+      return false;
+  
+    }
+}
+---------------------------------------------------------------
+DFS: T.c --> O(V+E), S.c --> O(V+E)
+class Solution {
+    int count = 0; 
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+      Queue<Integer> q = new LinkedList<>();
+      int[] indegrees = new int[numCourses];
+      HashMap<Integer,List<Integer>> map = new HashMap<>();
+      for(int i = 0; i < prerequisites.length; i++){
+           indegrees[prerequisites[i][0]]++; 
+           if(!map.containsKey(prerequisites[i][1])){
+               map.put(prerequisites[i][1], new ArrayList<>());
+           }
+           map.get(prerequisites[i][1]).add(prerequisites[i][0]);
+       }
+      List<Integer> temp = new ArrayList<>();
+      for(int i =0; i<indegrees.length; i++){
+        if(indegrees[i] == 0){
+            temp.add(i);            
+            count++;
+        }
+      }
+      for(int t: temp){
+            dfs(t,indegrees,map);                       
+      }
+      
+      if(count == numCourses){
+        return true;
+      }  
+      return false;
+    }
+    private void dfs(int temp, int[] indegrees,HashMap<Integer,List<Integer>> map){
+        if(map.containsKey(temp)){
+            List<Integer> curr = new ArrayList<>();
+            curr = map.get(temp);
+            for(int c: curr ){
+                indegrees[c]--;
+                if(indegrees[c]==0){
+                    count++;
+                    dfs(c,indegrees,map);
+                } 
+            }            
+        }
+        return;
+    }
+}
