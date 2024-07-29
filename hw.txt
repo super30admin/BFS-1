@@ -1,0 +1,93 @@
+#Problem 1
+
+BFS
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from queue import *
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root == None:
+            return []
+        
+        ret = []
+        q = Queue()
+        q.put(root)
+        while not q.empty():
+            size = q.qsize()
+            temp = []
+            for i in range(size):
+                curr = q.get()
+                temp.append(curr.val)
+                if curr.left != None:
+                    q.put(curr.left)
+                if curr.right != None:
+                    q.put(curr.right)
+            ret.append(temp)
+        return ret
+
+
+DFS
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root == None:
+            return []
+        
+        self.ret = []
+        self.dfs(root, 0)
+        return self.ret
+    
+    def dfs(self, root: Optional[TreeNode], level: int) -> None:
+        if root == None:
+            return
+        if len(self.ret) == level:
+            self.ret.append([])
+        
+        self.ret[level].append(root.val)
+        self.dfs(root.left, level + 1)
+        self.dfs(root.right, level + 1) 
+
+#Problem 2
+
+from queue import *
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if numCourses == 0:
+            return False
+        inDegrees = [0 for i in range(numCourses)]
+        preReq = {}
+        for course in prerequisites:
+            From = course[1]
+            To = course[0]
+            inDegrees[To] += 1
+            if From not in preReq:
+                preReq[From] = []
+            preReq[From].append(To)
+        q = Queue()
+        for i in range(len(inDegrees)):
+            if inDegrees[i] == 0:
+                q.put(i)
+        while q.qsize() > 0:
+            curr = q.get()
+            if curr in preReq:
+                edges = preReq[curr]
+                for edge in edges:
+                    inDegrees[edge] -= 1
+                    if inDegrees[edge] == 0:
+                        q.put(edge)
+        
+        for num in inDegrees:
+            if num != 0:
+                return False
+        return True
