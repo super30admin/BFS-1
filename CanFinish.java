@@ -1,0 +1,55 @@
+// Problem 207. Course Schedule
+// Time Complexity : O(V+E)
+// Space Complexity : O(V+E)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this :
+
+// Your code here along with comments explaining your approach
+class CanFinish {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        int[] indegrees = new int[numCourses];
+        for(int[] prerequisite: prerequisites){
+            int de = prerequisite[0];
+            int inde = prerequisite[1];
+            indegrees[de]++;
+            if(!map.containsKey(inde)){
+                map.put(inde, new ArrayList<>());
+            }
+            map.get(inde).add(de);
+        }
+        Queue<Integer> q = new LinkedList<>();
+        int count = 0;
+        for(int i=0; i < numCourses; i++){
+            if(indegrees[i] == 0){
+                q.add(i);
+                count++;
+            }
+        }
+        if(count == numCourses){
+            return true;
+        }
+        if(count == 0){
+            return false;
+        }
+        while(!q.isEmpty()){
+            int curr = q.poll();
+            // reduce indegrees of courses dependent on curr
+            List<Integer> children = map.get(curr);
+            if(children == null){
+                continue;
+            }
+            for(int child: children){
+                indegrees[child]--;
+                if(indegrees[child]== 0){
+                    q.add(child);
+                    count++;
+                    if(count == numCourses){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
