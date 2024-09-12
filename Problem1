@@ -1,0 +1,41 @@
+//Time complexity: O(n)
+//Space complexity: O(n)
+
+//Accepted in Leetcode: Yes
+
+//Approach:
+//1. If root is null, return empty list. Othwerwise, start with putting the root element in queue.
+//2. Dequeue the elements in the queue, for each element enqueue the left and right child(if they exist)
+//3. Add elements to the list
+//4. Add this list to the final list
+
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+     List<List<Integer>> res = new ArrayList<>();
+        
+    Queue<TreeNode> q= new LinkedList<>();
+        
+    if(root==null) return res;
+    
+    q.offer(root);
+    
+    while(!q.isEmpty())
+    {
+        int levelSize = q.size();
+		List<Integer> currLevel = new ArrayList<>();
+		for(int i = 0; i < levelSize; i++) {
+			TreeNode currNode = q.poll();
+			currLevel.add(currNode.val);
+			if (currNode.left != null)
+				q.add(currNode.left);
+			if (currNode.right != null)
+				q.add(currNode.right);
+		}
+		res.add(currLevel);
+    }
+        
+        
+    return res;
+    }
+}
