@@ -1,0 +1,47 @@
+// Time Complexity : O(n)
+// Space Complexity : O(n) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        /* 
+        // recursive apprach that is Dfs 
+        List<List<Integer> result = new ArrayList<>();
+        levelHelper(res, root, 0); /// recrusive call
+        return res;
+    }
+    
+    public void levelHelper(List<List<Integer>> res, TreeNode root, int height) {
+        if (root == null) return; // edge case
+        if (height >= res.size()) { // if result size less than or equal to height than add array list to result
+            res.add(new LinkedList<Integer>());
+        }
+        res.get(height).add(root.val); // get the list at the height and add val
+        levelHelper(res, root.left, height+1); // increase height and traverse left and right of tree
+        levelHelper(res, root.right, height+1);
+    }
+        */
+        
+        /* BFS approach */
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) return result; /* edge case*/
+        
+        Queue<TreeNode> q = new LinkedList<>(); // queue to add values
+        q.add(root);     // add root to queue
+        while(!q.isEmpty()){
+            List<Integer> tempList = new ArrayList<>(); // level order queue
+             int level = q.size(); // get the current size of the queue
+            while(level-- > 0){               
+                TreeNode temp = q.poll(); // pull the value out
+                if(temp.left != null) q.add(temp.left); // add the polled item left and right value
+                if(temp.right != null) q.add(temp.right);
+                tempList.add(temp.val);
+            }
+            result.add(tempList); // add templist to result
+
+        }
+        
+        return result;
+    }
+}

@@ -1,0 +1,53 @@
+// Time Complexity :O(n)
+// Space Complexity : O(n)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution {
+    
+    /* Recrusive dfs approach 
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        rightView(root, result, 0);
+        return result;
+    }
+    
+    public void rightView(TreeNode curr, List<Integer> result, int currDepth){
+     // edge case 
+        if(curr == null){
+            return;
+        }
+    //  if list is equal to height then we add the  val to result list 
+        if(currDepth == result.size()){
+            result.add(curr.val);
+        }
+        // first we tarverse to the right node of root and dfs in that direction adn then left of the roor 
+        rightView(curr.right, result, currDepth + 1);
+        rightView(curr.left, result, currDepth + 1);
+        
+    }
+    
+    */
+    
+        /* bfs approach same as order level but in this case just add the first value of queue to result and add right node value first to queue and then left value */
+    public List<Integer> rightSideView(TreeNode root) {
+         List<Integer> result = new ArrayList<>();
+         if (root == null) return result; /* edge case*/
+        
+        Queue<TreeNode> q = new LinkedList<>(); // queue to add values
+        q.add(root);     // add root to queue
+        while(!q.isEmpty()){
+            List<Integer> tempList = new ArrayList<>(); // level order queue
+             int level = q.size(); // get the current size of the queue
+            for(int i = 0; i< level ;i++){
+                
+                TreeNode temp = q.poll(); // pull the value out
+                if(temp.right != null) q.add(temp.right); // add the polled item left and right value
+                if(temp.left != null) q.add(temp.left);
+                if(i == 0) result.add(temp.val);
+            }
+        }
+        
+        return result;
+    }
+}
