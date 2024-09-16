@@ -1,0 +1,42 @@
+#SC=O(n)+O(n) # queus and indegrees array
+#TC=O(n)
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        prerequisites.sort()
+        indegrees=[0]*(numCourses) #indegrees array
+        hashmap=[[] for _ in range(numCourses)] #list of lists..every element corresponds to the course number
+        q=[] #queues
+        for i in prerequisites:
+            element1=i[0]
+            element2=i[1]
+            indegrees[element2]+=1
+            hashmap[element1].append(element2)
+        print indegrees, hashmap
+        
+        #put the first element in queue
+        #elementindegree0=indegrees.index(0)#....check this
+        for j in range(len(indegrees)):
+            if indegrees[j] ==0:
+                q.append(j)
+        #print elementindegree0
+        #iterate through the queue
+        print q
+        while(q!=[]):
+            course=q.pop(0) #
+            children=hashmap[course]
+            if children!=[]:
+                for child in children:
+                    print child
+                    indegrees[child]-=1
+                    if indegrees[child]==0:
+                        q.append(child)
+        for k in indegrees:
+            if k>0 : 
+                return False
+        return True
+        
