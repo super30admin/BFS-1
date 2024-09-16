@@ -1,0 +1,35 @@
+//Time Complexity : O(n)
+// Space Complexity :O(d) d is the no of elements on leaf level of the tree 
+// Did this code successfully run on Leetcode :Yes
+// Any problem you faced while coding this :No
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        //BFS solution
+        vector<vector<int>> r;
+        vector<int> res;
+        if(root==NULL) return res;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        while(q.empty()==false){
+            int size=q.size();
+            
+            int last_element = -1;
+            for(int i=0; i<size; i++){
+                TreeNode* node = q.front(); 
+                q.pop();
+                
+                last_element = node->val;
+                if(node->left!=NULL)
+                    q.push(node->left);
+                if(node->right!=NULL)
+                    q.push(node->right);
+            }
+            
+            res.push_back(last_element);
+        }
+        
+        return res;
+    }
+};
