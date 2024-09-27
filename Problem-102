@@ -1,0 +1,68 @@
+/*
+
+Time Complexity: O(n)
+
+Space Complexity:2^h -->  h=height
+
+LeetCode: fialed
+
+Approach:
+push root
+pop an element from queue and push children.
+now, for the number of possible children at a particular height, do the same thing.
+
+Issue: I would have to have an entire mapping of the tree for this.
+if the tree is not balanced, my approach fails.
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    List<List<Integer>> ls;
+    Queue<TreeNode> qu;
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if(root==null) return new ArrayList<List<Integer>>();
+        ls = new ArrayList<List<Integer>>();
+        qu = new LinkedList<TreeNode>();
+        qu.add(root);
+        bfsHelper(0);
+        
+        return ls;
+    }
+    
+    void bfsHelper(int ht)
+    {
+        if(qu.size()==0) return;
+        int i=0;
+        List<Integer> al = new ArrayList<>();
+        while(i<Math.pow(2,ht)&&qu.size()>0)
+        {
+            System.out.println(ht);
+            TreeNode temp=qu.remove();
+            if(temp!=null){
+                al.add(temp.val);
+                
+                qu.add(temp.left);
+                qu.add(temp.right);
+            }
+            else{
+             //   qu.add(null);
+             //   qu.add(null);
+                
+            }
+            i++;
+        }
+        if(al.size()>0) ls.add(al);
+        ht+=1;
+        bfsHelper(ht);
+        
+    }
+}
