@@ -1,0 +1,30 @@
+Approach1 :
+Time Complexity :O(N) N--> No of Vertices + Edges
+Space Complexity : O(v)+O(V)+O(V+E)=O(V+E) ---> No of vertices + Edges
+I referred to kan's algorithm for better understanding of python code
+class Solution: 
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if prerequisites==None or len(prerequisites)==0: ## Edge Case
+            return True
+        indegree=collections.defaultdict(set) ## Storing no of nodes coming in
+        outdegree=collections.defaultdict(set) ## Storing no of nodes going out
+        for x,y in prerequisites: 
+            outdegree[y].add(x)
+            indegree[x].add(y)
+        connection_removed=0
+        indegree_zero=[]
+        for i in range(numCourses):
+            if not indegree[i]:
+                indegree_zero.append(i)
+                connection_removed+=1
+        while indegree_zero:
+            node=indegree_zero.pop() ### Taking the course itself
+            for x in outdegree[node]: ### Remove the connections from the neigbours
+                indegree[x].remove(node)
+                if not indegree[x]:
+                    indegree_zero.append(x)
+                    connection_removed+=1
+        return connection_removed==numCourses
+                
+                
+            
