@@ -1,0 +1,31 @@
+// Time complexity: O(n)
+// Space Complexity: O(n/2) = O(n) n/2 would be the size of the last level, all the leaf nodes
+
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null) return res;
+        Queue<TreeNode> q = new LinkedList<>();
+
+        q.add(root);
+
+        while(!q.isEmpty()){
+            int size = q.size();
+            int last = -1;
+            for(int i = 0 ; i < size ; i++){
+                TreeNode curr = q.poll();
+                last = curr.val;
+                if(curr.left != null)
+                    q.add(curr.left);
+                if(curr.right != null)
+                    q.add(curr.right);
+
+            }
+            res.add(last);
+
+
+        }
+        return res;
+    }
+}
