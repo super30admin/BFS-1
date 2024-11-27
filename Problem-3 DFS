@@ -1,0 +1,27 @@
+//Time: O(n) : n are no of nodes
+//Space: O(1)
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list=new ArrayList<Integer>();
+        if(root==null) return list;
+        return helper(root,0,list);
+        
+    }
+    List<Integer> helper(TreeNode root, int depth, List<Integer> list)
+    {
+        //base case when hits null just return the list as it is
+        if(root==null) return list;
+        //when list size is equal to that level, add rightmost element since we are recursing of right tree first
+        if(list.size()==depth)
+        {
+            list.add(root.val);
+            //dont return list here because we will be checking more levels after adding into the list of that level
+        }
+        
+        helper(root.right,depth+1,list);
+        helper(root.left,depth+1,list);
+        //once both left and right subtree are done, list has correct values, return that
+        return list;
+    }
+    
+}
