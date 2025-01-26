@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Time Complexity: Space Complexity: Did this code successfully run on
- * Leetcode: Yes/No Any problem you faced while coding this: None
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ * Did this code successfully run on Leetcode: Yes
+ * Any problem you faced while coding this: None
  *
- * Approach: Explain your approach here.
+ * Approach:
+ * Using a queue, add each level nodes and add it to a list
+ * Eventually add that inner list to result list
  */
 public class BinaryTreeLevelOrderTraversal {
 
