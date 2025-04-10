@@ -1,0 +1,30 @@
+from collections import deque, defaultdict
+
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+      
+        # Build the adjacency list and indegree array
+        adj = defaultdict(list)
+        indegree = [0] * numCourses
+
+        for course, prereq in prerequisites:
+            adj[prereq].append(course)
+            indegree[course] += 1
+
+        # Queue for courses with no prerequisites
+        q = deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                q.append(i)
+
+        count = 0  # Number of courses we can finish
+
+        while q:
+            curr = q.popleft()
+            count += 1
+            for neighbor in adj[curr]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    q.append(neighbor)
+
+        return count == numCourses
