@@ -1,0 +1,49 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        // preprocessing 1.1: is  using a hashMap's - time O(E) space O(V+E)
+        // preprocessing 1.2: maintain an array with size intialized to the no.of incoming edges for that node 
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        int[] inEdges = new int[numCourses];
+        for(int[] edge : prerequisites){
+            map.putIfAbsent(edge[1] , new ArrayList<>()); // [[1,0]]
+            map.get(edge[1]).add(edge[0]);                 // 0 - 1;  [0,1] 1
+            inEdges[edge[0]]++;
+        }
+
+        int coursesCompleted = 0;
+        // BFS traversal with help of queue 
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i=0; i< numCourses ; i++){
+            if(inEdges[i] == 0) {
+                queue.add(i);
+                coursesCompleted++;
+            }
+        }
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            while(size > 0){
+                int currentCou = queue.remove();
+                List<Integer> edges = map.getOrDefault(currentCou , new ArrayList<>());
+                // iterate troguh edges - we constantly cehcka nd update our inEdges
+                for(int  i : edges){
+                    inEdges[i]--;
+                    if(inEdges[i] == 0){
+                        queue.add(i);
+                        coursesCompleted++;
+                    }
+                }
+                size--;
+            }
+        }
+
+            /* along the teaversal if the queue is empty and any of the 
+                incoming edges are not equal to zero in  inEdges[] array 
+                then we couldnt complete the cources or there was a cycle */
+
+            /* else we sucesfully traversed all the nodes n auxilary arr would have 0' @all idx's 
+            -- to achieve this i used a counter to track once a course got completed 
+            (to avoid extra loop torugh all the courses O(numCourses) for the final comparision ) */
+        return coursesCompleted == numCourses ;
+    }
+}
