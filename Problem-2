@@ -1,0 +1,59 @@
+// Time Complexity: O(V+E)
+// Space Complexity: O(V+E)
+
+// Calculate the indegree of each course and keep track of the dependent courses
+// Add courses with indegree 0 to the queue
+// when going through each course in the queue reduce the indegree of its dependents and add to the queue if the indegree becomes 0
+// If indegree of all courses become 0 then al courses can be completed else a cycle exists
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        int[] inDegrees = new int[numCourses];
+
+        // calculate indegree of each course
+        // keep track of dependent courses for each course in the hashmap
+        for(int[] courses : prerequisites) {
+            int course = courses[0];
+            int prereq = courses[1];
+            inDegrees[course]++;
+            if(!mp.containsKey(prereq))
+                mp.put(prereq, new ArrayList<>());
+            mp.get(prereq).add(course);
+        }
+
+        int count = 0;
+        Queue<Integer> q = new LinkedList<>();
+        
+        // Add all courses with indegree 0 to the queue
+        for(int i = 0; i < numCourses; i++) {
+            if(inDegrees[i] == 0) {
+                q.add(i);
+                count++;
+            }
+        }
+
+        if(count == numCourses) // all courses are independent of eachother
+            return true;
+        if(count == 0) // all courses are depenedent on others
+            return false;
+
+        while(!q.isEmpty()) {
+            int course = q.poll();
+            List<Integer> deps = mp.get(course);
+            if(deps != null) {
+                for(int i = 0; i < deps.size(); i++) {
+                    int dep = deps.get(i);
+                    inDegrees[dep]--;
+                    if(inDegrees[dep] == 0) {
+                        q.add(dep);
+                        count++;
+                    }
+                    if(count == numCourses)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+}
