@@ -1,0 +1,47 @@
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+// Use a queue to keep track of the nodes in each level
+// When accessing each nmode from the queue add its children if it exists to the queue
+// Keep track of the size of the queue at each level to differentiate the nodes by levels
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null)
+            return result;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        TreeNode curr = root;
+        while(!q.isEmpty()) {
+            int size = q.size(); //size of the queue at each level
+            List<Integer> l = new ArrayList<>();
+            while(size > 0) {
+                TreeNode n = q.poll();
+                l.add(n.val);
+                if(n.left != null) 
+                    q.add(n.left); // add left child to queue
+                if(n.right != null)
+                    q.add(n.right); // add right child to queue
+                size--;
+            }
+            result.add(l);
+        }
+        return result;
+    }
+}
