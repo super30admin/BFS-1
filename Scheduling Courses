@@ -1,0 +1,51 @@
+// We use BFS to perform topological sort by starting with nodes that have zero incoming edges (indegree 0).
+// As we visit each course, we reduce the indegree of its dependents and add them to the queue if their indegree becomes zero.
+// If we can visit all courses this way, there's no cycle, and the courses can be completed.
+
+// time o(v+e)
+// space o(v+e)
+
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+
+        int[] indegrees = new int[numCourses];
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+        for(int[] pr : prerequisites){
+            // pr[0] - dependent, pr[1] - independent
+            indegrees[pr[0]]++;
+            map.putIfAbsent(pr[1], new ArrayList<>());
+            map.get(pr[1]).add(pr[0]);
+        }
+
+        int count = 0;
+        Queue<Integer> q = new LinkedList<>();
+
+        for(int i = 0; i < numCourses; i++){
+            if(indegrees[i] == 0){
+                q.add(i);
+                count++;
+            }
+        }
+
+        if(q.isEmpty()) return false;
+        if(count == numCourses) return true;
+
+        while(!q.isEmpty()){
+            int curr = q.poll();
+            List<Integer> dependencies = map.get(curr);
+            if(dependencies != null){
+                for(int dependent : dependencies){
+                    indegrees[dependent]--;
+                    if(indegrees[dependent] == 0){
+                        q.add(dependent);
+                        count++;
+                        if(count == numCourses) return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+}
