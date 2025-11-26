@@ -43,4 +43,42 @@ class Solution {
 
         return count == numCourses;
     }
+
+    boolean flag = true;
+    public boolean canFinishDFS(int numCourses, int[][] prerequisites) {
+        boolean[] path = new boolean[numCourses];
+        boolean[] memo = new boolean[numCourses];
+
+        HashMap<Integer, List<Integer>> map = new HashMap();
+        for(int[] edge: prerequisites){
+            int ai = edge[0];
+            int bi = edge[1];
+            if(!map.containsKey(ai))
+                map.put(ai,new ArrayList());
+            map.get(ai).add(bi);
+        }
+
+        for(int i=0;i<numCourses;i++){
+            if(flag)
+                dfs(i,map,path,memo);
+        }
+
+        return flag;
+    }
+
+    private void dfs(int start, HashMap<Integer, List<Integer>> map, boolean[] path, boolean[] memo){
+
+        if(!map.containsKey(start) || memo[start]) return;
+        path[start] = true;
+        memo[start] = true;
+        for(int i: map.get(start)){
+            if(path[i]) flag = false;
+            path[i] = true;
+            if(flag)
+                dfs(i,map,path,memo);
+            path[i] = false;
+        }
+        path[start] = false;
+        
+    }
 }
