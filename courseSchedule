@@ -1,0 +1,45 @@
+class Solution {
+    //TC / SC O(V+E)
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] indegree = new int[numCourses];
+        HashMap<Integer, List<Integer>> hm = new HashMap<>();
+        //make indegree array and populate map
+        for (int[] pr : prerequisites) {
+            indegree[pr[0]]++;
+            hm.putIfAbsent(pr[1], new ArrayList<>());
+            hm.get(pr[1]).add(pr[0]);
+        }
+      
+        //bfs
+        int count = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+
+            if (indegree[i] == 0) {
+                q.add(i);
+                count++;
+            }
+        }
+       
+         if (count == numCourses)
+                return true;
+
+        while (!q.isEmpty()) {
+           
+            int curr = q.poll();
+            List<Integer> children = hm.get(curr);
+            if (null != children) {
+                for (int child : children) {
+                    indegree[child]--;
+                    if (indegree[child] == 0) {
+                        q.add(child);
+                        count++;
+                        if (count == numCourses)
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
